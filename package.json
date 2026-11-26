@@ -1,0 +1,21 @@
+{
+  "name": "smart-parking-la-piazza",
+  "version": "1.0.0",
+  "description": "Sistema de monitoreo de parqueadero inteligente para La Piazza, Machala",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "iot",
+    "esp32",
+    "smart-parking",
+    "express"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}

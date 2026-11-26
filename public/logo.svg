@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 56" width="250" height="56" fill="none">
+  <defs>
+    <linearGradient id="archGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="bgBadge" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Bold Iconic Rounded Emblem (McDonald's / Wendy's style punchy badge) -->
+  <rect x="4" y="4" width="48" height="48" rx="16" fill="url(#bgBadge)"/>
+  <rect x="7" y="7" width="42" height="42" rx="13" fill="#071120"/>
+
+  <!-- Iconic Golden-Amber Parking Arch "P" -->
+  <path d="M19 40V22C19 16.5 23 13 28.5 13C34 13 38 16.5 38 21.5C38 26.5 34 30 28.5 30H24.5V40H19Z" fill="url(#archGrad)"/>
+  <circle cx="28.5" cy="21.5" r="3.5" fill="#071120"/>
+  <!-- Friendly Sensor Smile / Wave under the arch -->
+  <path d="M23 36.5C26 39 32 39 35 36.5" stroke="#10b981" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Bold Friendly Wordmark -->
+  <text x="64" y="36" font-family="'Plus Jakarta Sans', 'Nunito', 'Segoe UI', system-ui, sans-serif" font-size="25" font-weight="900" letter-spacing="-0.6" fill="#ffffff">
+    Park<tspan fill="#fbbf24">Sense</tspan>
+  </text>
+
+  <!-- Punchy "32" Pill -->
+  <rect x="196" y="15" width="34" height="26" rx="13" fill="url(#archGrad)"/>
+  <text x="213" y="33" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Nunito', 'Segoe UI', system-ui, sans-serif" font-size="14" font-weight="900" fill="#071120">
+    32
+  </text>
+</svg>

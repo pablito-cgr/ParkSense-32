@@ -1,0 +1,2037 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ParkSense 32 &bull; Sistema Inteligente de Gestión de Estacionamientos</title>
+  <meta name="description"
+    content="Plataforma de automatización y gestión de estacionamientos con sensores, microcontroladores ESP32 y sistema de autoservicio para conductores.">
+  <meta property="og:title" content="ParkSense 32 • Estacionamiento Inteligente en Tiempo Real">
+  <meta property="og:description"
+    content="Consulta espacios disponibles en vivo antes de llegar. Acceso automatizado y seguridad 24/7.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#F6F7F4">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="public-redesign.css">
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
+</head>
+
+<body class="vista-publica">
+
+  <!-- Orbes de Luz Ambiental para el Fondo Tecnológico -->
+  <div class="ambient-lights" aria-hidden="true">
+    <div class="light-orb orb-1"></div>
+    <div class="light-orb orb-2"></div>
+    <div class="light-orb orb-3"></div>
+  </div>
+
+  <!-- =========================================================
+       MODO 1: PÁGINA PRINCIPAL PUBLICITARIA Y COMERCIAL
+       ========================================================= -->
+  <div id="modo-publico" class="modo-seccion">
+
+    <!-- Barra Superior de Navegación (11 secciones) -->
+    <header class="public-navbar">
+      <div class="nav-content-wrapper">
+        <a href="#inicio" class="nav-brand-box">
+          <svg class="brand-mark-svg" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+            <rect width="36" height="36" rx="10" fill="#0D1512" />
+            <path
+              d="M12 25V11H19.5C22.5 11 24.5 12.8 24.5 15.6C24.5 18.4 22.5 20.2 19.5 20.2H15.5V25H12ZM15.5 17.2H19.1C20.5 17.2 21.3 16.6 21.3 15.6C21.3 14.6 20.5 14 19.1 14H15.5V17.2Z"
+              fill="#F6F7F4" />
+            <circle cx="26.5" cy="23.5" r="3" fill="#00C47D" />
+          </svg>
+          <span class="brand-wordmark">VialCore<span>Tech</span></span>
+        </a>
+
+        <nav class="nav-menu-links" id="nav-menu-links">
+          <a href="#inicio" class="nav-link active">Inicio</a>
+          <a href="#nosotros" class="nav-link">Nosotros</a>
+          <a href="#producto" class="nav-link">Producto</a>
+          <a href="#como-funciona" class="nav-link">Cómo Funciona</a>
+          <a href="#simulacion" class="nav-link">Simulación</a>
+          <a href="#monitoreo" class="nav-link">Monitoreo</a>
+          <a href="#desarrollo" class="nav-link">Desarrollo</a>
+          <a href="#codigo" class="nav-link">Código</a>
+          <a href="#resultados" class="nav-link">Resultados</a>
+          <a href="#equipo" class="nav-link">Equipo</a>
+          <a href="#contacto" class="nav-link">Contacto</a>
+        </nav>
+
+        <div class="nav-cta-actions">
+          <a href="#monitoreo" class="nav-live-chip">
+            <span class="live-pulse-dot" aria-hidden="true"></span>
+            <span id="hero-badge-aforo">4 / 4 disponibles</span>
+          </a>
+          <button type="button" id="btn-nav-mobile" class="btn-nav-mobile" aria-label="Abrir menú de navegación">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-public-content">
+
+      <!-- IDs ocultos que app.js actualiza en segundo plano -->
+      <div style="display:none" aria-hidden="true">
+        <span id="hero-mini-e1"></span>
+        <span id="hero-mini-e2"></span>
+        <span id="hero-mini-e3"></span>
+        <span id="hero-mini-e4"></span>
+        <span id="hero-mini-state-e1"></span>
+        <span id="hero-mini-state-e2"></span>
+        <span id="hero-mini-state-e3"></span>
+        <span id="hero-mini-state-e4"></span>
+        <strong id="hero-barrier-state">CONTROL AUTOMATIZADO</strong>
+      </div>
+
+      <!-- =========================================================
+           1. INICIO (#inicio)
+           ========================================================= -->
+      <section id="inicio" class="hero-signal-split">
+        <div class="hero-left-align">
+          <div class="brand-company-bar">
+            <div class="company-logo-slot">
+              <img src="assets/logo-empresa.png" alt="Logo VialCore Tech"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <span class="company-logo-fallback" style="display:none;">LOGO</span>
+            </div>
+            <span class="company-name-text">VialCore Tech · Ingeniería IoT</span>
+          </div>
+
+          <h1 class="hero-display-title">
+            ParkSense <span class="highlight-signal">32</span>
+          </h1>
+
+          <p class="hero-slogan">Espacios inteligentes, ciudad en movimiento.</p>
+
+          <p class="hero-lead">
+            Plataforma inteligente de estacionamiento basada en ESP32 y sensores ultrasónicos que monitorea plazas en
+            tiempo real y automatiza el acceso vehicular sin demoras.
+          </p>
+
+          <div class="hero-cta-row">
+            <a href="#monitoreo" class="btn-primary-signal">
+              <span class="btn-dot" aria-hidden="true"></span>
+              <span>Ver monitoreo en vivo</span>
+            </a>
+            <a href="#como-funciona" class="btn-secondary-outline">
+              <span>Cómo funciona</span>
+            </a>
+          </div>
+
+          <div class="hero-proof-strip">
+            <div>
+              <span class="proof-val">&lt; 40s</span>
+              <span class="proof-lbl">Tiempo medio para aparcar</span>
+            </div>
+            <div>
+              <span class="proof-val">100%</span>
+              <span class="proof-lbl">Acceso automatizado</span>
+            </div>
+            <div>
+              <span class="proof-val">-45%</span>
+              <span class="proof-lbl">Menos emisiones de CO₂</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="media-placeholder-box hero-media-box">
+          <img src="assets/prototipo-principal.jpg" alt="Fotografía destacada del prototipo ParkSense 32"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="media-placeholder-fallback">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <circle cx="8.5" cy="8.5" r="1.5" />
+              <path d="m21 15-5-5L5 21" />
+            </svg>
+            <strong>Fotografía destacada del prototipo</strong>
+            <span>Reemplazar ruta: public/assets/prototipo-principal.jpg</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           2. SOBRE NOSOTROS Y EL PROYECTO (#nosotros)
+           ========================================================= -->
+      <section id="nosotros" class="section-block">
+        <div class="section-header-split">
+          <div>
+            <span class="section-kicker">02 · Sobre Nosotros</span>
+            <h2 class="section-title">VialCore Tech y el origen de ParkSense 32</h2>
+          </div>
+          <p class="section-subtitle">
+            Innovación tecnológica nacida en Machala para transformar la movilidad en estacionamientos urbanos y
+            comerciales.
+          </p>
+        </div>
+
+        <div class="nosotros-grid">
+          <div class="info-card-clean">
+            <h3>Nuestra empresa y cómo surgió</h3>
+            <p>
+              <strong>VialCore Tech</strong> es un equipo multidisciplinario enfocado en soluciones IoT para
+              infraestructura vial. El proyecto surgió al observar los cuellos de botella diarios en el parqueadero de
+              La Piazza (Machala), donde los conductores recorrían los pasillos sin saber si existían plazas libres.
+            </p>
+          </div>
+          <div class="info-card-clean">
+            <h3>Problema que busca solucionar</h3>
+            <p>
+              La búsqueda manual de estacionamiento genera demoras de hasta 12 minutos, congestión en los carriles de
+              maniobra, consumo innecesario de combustible y errores en el control manual de entradas, salidas y
+              sentidos de circulación.
+            </p>
+          </div>
+          <div class="info-card-clean">
+            <h3>Propósito y necesidad del desarrollo</h3>
+            <p>
+              Nuestro propósito es brindar visibilidad inmediata de cada plaza antes de ingresar, automatizar las
+              barreras de entrada y salida, alertar ingresos en contramano y ofrecer una consola web unificada para
+              conductores, kiosco y administración.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           3. NUESTRO PRODUCTO (#producto)
+           ========================================================= -->
+      <section id="producto" class="section-block">
+        <div class="section-header-split">
+          <div>
+            <span class="section-kicker">03 · Nuestro Producto</span>
+            <h2 class="section-title">ParkSense 32: gestión inteligente integral</h2>
+          </div>
+          <p class="section-subtitle">
+            Dispositivo IoT con microcontrolador ESP32 Dual-Core, sensórica ultrasónica por bahía, terminal de
+            autoservicio y monitoreo web en tiempo real.
+          </p>
+        </div>
+
+        <div class="solucion-bento-grid" style="margin-bottom: 48px;">
+          <div class="bento-card bento-span-7 bento-featured">
+            <div class="bento-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <polyline points="12 6 12 12 16 14" />
+              </svg>
+            </div>
+            <div>
+              <div class="bento-stat-callout">12 min &rarr; 40 seg</div>
+              <h3>Asignación recomendada y acceso inmediato</h3>
+              <p>
+                ParkSense 32 evalúa la disponibilidad real de las 4 plazas (A1, A2, B1, B2), recomienda el espacio
+                óptimo en el kiosco de entrada y eleva automáticamente la barrera servomotora tras confirmar el
+                registro.
+              </p>
+            </div>
+          </div>
+
+          <div class="bento-card bento-span-5">
+            <div class="bento-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </div>
+            <div>
+              <h3>Visibilidad web y señalización física</h3>
+              <p>
+                LEDs verde/rojo en cada bahía, pantalla LCD 16x2 en el acceso y panel web sincronizado para consultar
+                disponibilidad desde cualquier dispositivo.
+              </p>
+            </div>
+          </div>
+
+          <div class="bento-card bento-span-5">
+            <div class="bento-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </div>
+            <div>
+              <h3>Seguridad vial y alerta de contramano</h3>
+              <p>
+                Sensor infrarrojo en la salida acoplado a un buzzer acústico que detecta y alerta si un vehículo intenta
+                ingresar en sentido contrario.
+              </p>
+            </div>
+          </div>
+
+          <div class="bento-card bento-span-7">
+            <div class="bento-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
+              </svg>
+            </div>
+            <div>
+              <h3>Sostenibilidad y auditoría centralizada</h3>
+              <p>
+                Menor tiempo con el motor en marcha reduce emisiones de CO₂ y gasto de combustible, mientras el sistema
+                registra placas, tiempos de estancia y reportes CSV.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bloque comparativo -->
+        <div class="tabla-comparativa-wrapper">
+          <table class="tabla-comparativa">
+            <thead>
+              <tr>
+                <th>Criterio operativo</th>
+                <th class="col-tradicional">Estacionamiento Tradicional</th>
+                <th class="col-smart">ParkSense 32</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Identificación de espacios</strong></td>
+                <td>Manual: el conductor recorre filas sin certeza de disponibilidad.</td>
+                <td class="resaltado-smart">Automática: visualización en pantalla web, LCD y LEDs por bahía.</td>
+              </tr>
+              <tr>
+                <td><strong>Tiempo de búsqueda</strong></td>
+                <td>Elevado: entre 10 y 15 minutos en horas pico.</td>
+                <td class="resaltado-smart">Mínimo: asignación directa y guiada en menos de 40 segundos.</td>
+              </tr>
+              <tr>
+                <td><strong>Automatización de acceso</strong></td>
+                <td>Nula o básica: tickets impresos y operación manual.</td>
+                <td class="resaltado-smart">Total: kiosco táctil, servomotores SG90 y cierre por sensor al pasar.</td>
+              </tr>
+              <tr>
+                <td><strong>Control y seguridad</strong></td>
+                <td>Registros dispersos y sin alerta de ingreso en sentido contrario.</td>
+                <td class="resaltado-smart">Auditoría por placa/movimiento y alarma IR + buzzer de contramano.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           4. ¿CÓMO FUNCIONA? (#como-funciona)
+           ========================================================= -->
+      <section id="como-funciona" class="section-block">
+        <div class="section-header-split">
+          <div>
+            <span class="section-kicker">04 · ¿Cómo Funciona?</span>
+            <h2 class="section-title">Operación paso a paso y arquitectura electrónica</h2>
+          </div>
+          <p class="section-subtitle">
+            Desde el registro del conductor hasta la lectura de sensores y el accionamiento automático de las barreras.
+          </p>
+        </div>
+
+        <div class="proceso-steps-grid" style="margin-bottom: 40px;">
+          <div class="proceso-step-card">
+            <span class="step-num">01</span>
+            <h3>Registro de placa</h3>
+            <p>El conductor ingresa su placa en la terminal de autoservicio al llegar a la barrera de entrada.</p>
+          </div>
+          <div class="proceso-step-card">
+            <span class="step-num">02</span>
+            <h3>Asignación inteligente</h3>
+            <p>El sistema evalúa los espacios A1–B2 en tiempo real y recomienda el lugar óptimo disponible.</p>
+          </div>
+          <div class="proceso-step-card">
+            <span class="step-num">03</span>
+            <h3>Apertura y paso por sensor</h3>
+            <p>El servomotor eleva la barrera a 90°; cuando el sensor ultrasónico confirma que el auto pasó, la barrera
+              baja.</p>
+          </div>
+          <div class="proceso-step-card">
+            <span class="step-num">04</span>
+            <h3>Estacionamiento y salida</h3>
+            <p>El sensor de la bahía cambia el LED a rojo y actualiza la web; al salir, libera el espacio
+              automáticamente.</p>
+          </div>
+        </div>
+
+        <div class="tecnologias-grid" style="margin-bottom: 32px;">
+          <div class="componente-card">
+            <div class="componente-header">
+              <span class="comp-badge">240 MHz · WiFi</span>
+              <svg class="comp-icon-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="4" width="16" height="16" rx="2" />
+                <rect x="9" y="9" width="6" height="6" />
+                <path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2" />
+              </svg>
+            </div>
+            <h3 class="comp-title">ESP32 Dual-Core</h3>
+            <span class="comp-func-tag">Unidad central de procesamiento</span>
+            <p class="comp-desc">Coordina lecturas ultrasónicas, servos, pantalla LCD, LEDs, buzzer y comunicación HTTP
+              WiFi con el servidor Node.js.</p>
+          </div>
+
+          <div class="componente-card">
+            <div class="componente-header">
+              <span class="comp-badge">40 kHz · Eco</span>
+              <svg class="comp-icon-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 10v3" />
+                <path d="M6 6v11" />
+                <path d="M10 3v18" />
+                <path d="M14 8v7" />
+                <path d="M18 5v13" />
+                <path d="M22 10v3" />
+              </svg>
+            </div>
+            <h3 class="comp-title">Sensores Ultrasónicos HC-SR04</h3>
+            <span class="comp-func-tag">Detección en bahías y barreras</span>
+            <p class="comp-desc">Miden distancia por ondas acústicas en las 4 plazas (A1–B2) y en las barreras de
+              entrada/salida con inmunidad a luz solar.</p>
+          </div>
+
+          <div class="componente-card">
+            <div class="componente-header">
+              <span class="comp-badge">PWM 0°–90°</span>
+              <svg class="comp-icon-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22v-7" />
+                <path d="M5 12H2a10 10 0 0 0 20 0h-3" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </div>
+            <h3 class="comp-title">Servomotores SG90</h3>
+            <span class="comp-func-tag">Accionamiento suave de barreras</span>
+            <p class="comp-desc">Controlados mediante tarea independiente en FreeRTOS para elevar y bajar las
+              talanqueras gradualmente sin picos de corriente.</p>
+          </div>
+
+          <div class="componente-card">
+            <div class="componente-header">
+              <span class="comp-badge">Óptico IR · Pin 14</span>
+              <svg class="comp-icon-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="2" />
+                <path
+                  d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14" />
+              </svg>
+            </div>
+            <h3 class="comp-title">Sensor Infrarrojo FC-51</h3>
+            <span class="comp-func-tag">Detección de contramano</span>
+            <p class="comp-desc">Vigila el exterior de la salida para detectar si alguien intenta ingresar en sentido
+              contrario cuando la salida no está activa.</p>
+          </div>
+
+          <div class="componente-card">
+            <div class="componente-header">
+              <span class="comp-badge">Acústico · Pin 27</span>
+              <svg class="comp-icon-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+              </svg>
+            </div>
+            <h3 class="comp-title">Buzzer Zumbador</h3>
+            <span class="comp-func-tag">Alerta sonora inmediata</span>
+            <p class="comp-desc">Emite pitidos intermitentes de advertencia durante al menos 3 segundos cuando el sensor
+              IR detecta un ingreso indebido.</p>
+          </div>
+
+          <div class="componente-card">
+            <div class="componente-header">
+              <span class="comp-badge">I2C 0x27</span>
+              <svg class="comp-icon-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="14" rx="2" />
+                <path d="M8 20h8" />
+              </svg>
+            </div>
+            <h3 class="comp-title">Pantalla LCD 16x2 I2C</h3>
+            <span class="comp-func-tag">Información en tiempo real</span>
+            <p class="comp-desc">Muestra en el acceso el conteo actualizado de plazas libres y ocupadas sin ocupar
+              múltiples pines del ESP32.</p>
+          </div>
+
+          <div class="componente-card">
+            <div class="componente-header">
+              <span class="comp-badge">Señalización · GPIO</span>
+              <svg class="comp-icon-svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5" />
+                <path
+                  d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+              </svg>
+            </div>
+            <h3 class="comp-title">LEDs Rojo / Verde</h3>
+            <span class="comp-func-tag">Indicadores de estado por plaza</span>
+            <p class="comp-desc">Iluminan verde cuando el espacio está libre y conmutan a rojo cuando el sensor
+              ultrasónico detecta un vehículo estacionado.</p>
+          </div>
+        </div>
+
+        <div class="flow-diagram-grid">
+          <div class="logic-flow-card">
+            <h3>Flujo lógico del sistema</h3>
+            <ul class="logic-list">
+              <li><span class="logic-badge">01</span><span><strong>Lectura de sensores:</strong> El ESP32 promedia 3
+                  ecos por cada sensor HC-SR04 y evalúa el umbral (&le; 12 cm = ocupada).</span></li>
+              <li><span class="logic-badge">02</span><span><strong>Procesamiento y red:</strong> Actualiza LEDs/LCD y
+                  envía JSON cada 800 ms vía HTTP POST a <code>/api/estado</code>.</span></li>
+              <li><span class="logic-badge">03</span><span><strong>Comandos bidireccionales:</strong> El servidor
+                  responde con órdenes del Kiosco (<code>abrir_auto</code>) o del Admin
+                  (<code>abrir</code>/<code>cerrar</code>).</span></li>
+              <li><span class="logic-badge">04</span><span><strong>Respuesta de actuadores:</strong> Los servos SG90
+                  abren suavemente la barrera y el sensor ultrasónico la cierra al completar el paso.</span></li>
+            </ul>
+          </div>
+
+          <div class="media-placeholder-box">
+            <img src="assets/diagrama-funcionamiento.png" alt="Diagrama de flujo y funcionamiento de ParkSense 32"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="media-placeholder-fallback">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <path d="M8 8h8v8H8z" />
+              </svg>
+              <strong>Diagrama o esquema de funcionamiento</strong>
+              <span>Reemplazar ruta: public/assets/diagrama-funcionamiento.png</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           5. SIMULACIÓN DEL PROYECTO (#simulacion)
+           ========================================================= -->
+      <section id="simulacion" class="section-block">
+        <div class="section-header-split">
+          <div>
+            <span class="section-kicker">05 · Simulación Electrónica</span>
+            <h2 class="section-title">Validación previa en entorno virtual</h2>
+          </div>
+          <p class="section-subtitle">
+            Antes del montaje físico, el circuito completo fue validado en simulador para verificar pines, tiempos PWM y
+            lógica de alertas.
+          </p>
+        </div>
+
+        <div class="simulacion-grid">
+          <div class="media-placeholder-box" style="min-height: 360px;">
+            <img src="assets/simulacion-circuito.png" alt="Vista previa del circuito simulado en Wokwi/Tinkercad"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="media-placeholder-fallback">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4" />
+              </svg>
+              <strong>Vista previa del circuito simulado</strong>
+              <span>Reemplazar ruta: public/assets/simulacion-circuito.png</span>
+            </div>
+          </div>
+
+          <div class="simulacion-info-card">
+            <div>
+              <h3 style="font-family:var(--font-display);margin:0 0 16px 0;color:var(--ink);">Mapa de conexiones ESP32
+              </h3>
+              <ul class="conexiones-lista">
+                <li><strong>4x HC-SR04 (Plazas A1–B2)</strong><code>TRIG D13 · ECHO D34, D35, D32, D33</code></li>
+                <li><strong>2x HC-SR04 (Barreras)</strong><code>TRIG D2 · ECHO D36 (Ent), D39 (Sal)</code></li>
+                <li><strong>LEDs Verdes (Plazas 1–4)</strong><code>D4, D16, D17, D18</code></li>
+                <li><strong>LEDs Rojos (Plazas 1–4)</strong><code>D19, D23, D25, D5</code></li>
+                <li><strong>Servomotores SG90</strong><code>D15 (Entrada) · D12 (Salida)</code></li>
+                <li><strong>IR Contramano + Buzzer</strong><code>IR D14 · Buzzer D27</code></li>
+                <li><strong>Pantalla LCD I2C 16x2</strong><code>SDA D21 · SCL D22 (0x27)</code></li>
+              </ul>
+            </div>
+
+            <div>
+              <a href="https://wokwi.com/" target="_blank" rel="noopener noreferrer" class="btn-primary-signal"
+                style="width:100%;">
+                <span>Abrir simulación en Wokwi / Tinkercad</span>
+              </a>
+              <small
+                style="display:block;margin-top:8px;color:var(--muted);font-family:var(--font-mono);font-size:0.72rem;">
+                * Reemplaza el href con tu enlace directo de Wokwi o Tinkercad.
+              </small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           6. MONITOREO Y DATOS EN TIEMPO REAL (#monitoreo)
+           ========================================================= -->
+      <section id="monitoreo" class="section-block">
+        <div class="section-header-split">
+          <div>
+            <span class="section-kicker">06 · Monitoreo en Tiempo Real</span>
+            <h2 class="section-title">Disponibilidad y telemetría en vivo</h2>
+          </div>
+          <p class="section-subtitle">
+            Dashboard conectado directamente a la API del servidor Node.js y al microcontrolador ESP32.
+          </p>
+        </div>
+
+        <!-- Estado de conexión y última actualización -->
+        <div class="monitoreo-top-status">
+          <div id="monitoreo-conn-badge" class="conn-badge online">
+            <span class="live-pulse-dot" aria-hidden="true"></span>
+            <span id="monitoreo-conn-text">Conectado al servidor · Esperando telemetría</span>
+          </div>
+          <div class="monitoreo-update-time">
+            Última actualización: <strong id="monitoreo-ultima-actualizacion">--/--/---- --:--:--</strong>
+          </div>
+        </div>
+
+        <!-- Banner de Aforo / Alerta -->
+        <div id="alerta-aforo-publico" class="banner-aforo-publico oculto">
+          <div class="alerta-aforo-icono">&#9888;</div>
+          <div class="alerta-aforo-cuerpo">
+            <strong id="alerta-aforo-titulo">¡Estacionamiento completo!</strong>
+            <span id="alerta-aforo-desc">Todos los espacios están ocupados. La barrera no admitirá nuevos ingresos hasta
+              que un vehículo registre su salida.</span>
+          </div>
+        </div>
+
+        <!-- Barra Métrica Unificada -->
+        <div class="summary-metric-bar">
+          <div class="summary-metric-cell">
+            <span class="summary-num" id="pub-total-espacios">4</span>
+            <span class="summary-label">Espacios totales</span>
+          </div>
+          <div class="summary-metric-cell cell-green">
+            <span class="summary-num" id="pub-libres-espacios">3</span>
+            <span class="summary-label">Disponibles ahora</span>
+          </div>
+          <div class="summary-metric-cell cell-red">
+            <span class="summary-num" id="pub-ocupados-espacios">1</span>
+            <span class="summary-label">Ocupados</span>
+          </div>
+          <div class="summary-metric-cell">
+            <span class="summary-num" id="pub-porcentaje-aforo">25%</span>
+            <span class="summary-label">Nivel de aforo</span>
+          </div>
+        </div>
+
+        <!-- Plano Interactivo del Estacionamiento -->
+        <div class="parking-lot-plan">
+          <div class="parking-row-header">
+            <span class="row-label">FILA A</span>
+            <span class="row-hint">Zona Norte</span>
+          </div>
+          <div class="espacios-grid-publico parking-row-grid">
+            <div class="tarjeta-espacio parking-bay" id="card-pub-e1">
+              <div class="espacio-top-header">
+                <span class="espacio-codigo-badge">A1</span>
+                <span class="espacio-estado-pill badge-green" id="pill-pub-e1">Disponible</span>
+              </div>
+              <div class="espacio-visual-icon" id="icon-pub-e1">
+                <div class="circulo-letra-p">P</div>
+              </div>
+              <div class="espacio-detalles-info">
+                <span class="detalle-sub" id="desc-pub-e1">Espacio libre para estacionar</span>
+                <span class="detalle-placa" id="placa-pub-e1"></span>
+              </div>
+            </div>
+
+            <div class="tarjeta-espacio parking-bay" id="card-pub-e2">
+              <div class="espacio-top-header">
+                <span class="espacio-codigo-badge">A2</span>
+                <span class="espacio-estado-pill badge-green" id="pill-pub-e2">Disponible</span>
+              </div>
+              <div class="espacio-visual-icon" id="icon-pub-e2">
+                <div class="circulo-letra-p">P</div>
+              </div>
+              <div class="espacio-detalles-info">
+                <span class="detalle-sub" id="desc-pub-e2">Espacio libre para estacionar</span>
+                <span class="detalle-placa" id="placa-pub-e2"></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="parking-driving-lane">
+            <span class="lane-arrow">&rarr;</span>
+            <span class="lane-text">CARRIL DE CIRCULACIÓN</span>
+            <span class="lane-arrow">&rarr;</span>
+          </div>
+
+          <div class="parking-row-header">
+            <span class="row-label">FILA B</span>
+            <span class="row-hint">Zona Sur</span>
+          </div>
+          <div class="espacios-grid-publico parking-row-grid">
+            <div class="tarjeta-espacio parking-bay" id="card-pub-e3">
+              <div class="espacio-top-header">
+                <span class="espacio-codigo-badge">B1</span>
+                <span class="espacio-estado-pill badge-verde" id="pill-pub-e3">Disponible</span>
+              </div>
+              <div class="espacio-visual-icon" id="icon-pub-e3">
+                <div class="circulo-letra-p">P</div>
+              </div>
+              <div class="espacio-detalles-info">
+                <span class="detalle-sub" id="desc-pub-e3">Espacio disponible</span>
+                <span class="detalle-placa" id="placa-pub-e3"></span>
+              </div>
+            </div>
+
+            <div class="tarjeta-espacio parking-bay" id="card-pub-e4">
+              <div class="espacio-top-header">
+                <span class="espacio-codigo-badge">B2</span>
+                <span class="espacio-estado-pill badge-green" id="pill-pub-e4">Disponible</span>
+              </div>
+              <div class="espacio-visual-icon" id="icon-pub-e4">
+                <div class="circulo-letra-p">P</div>
+              </div>
+              <div class="espacio-detalles-info">
+                <span class="detalle-sub" id="desc-pub-e4">Espacio libre para estacionar</span>
+                <span class="detalle-placa" id="placa-pub-e4"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lecturas de sensores, historial y mecanismo de comunicación -->
+        <div class="monitoreo-bottom-grid">
+          <div class="monitoreo-panel-card">
+            <h3>Lecturas de sensores y barreras</h3>
+            <div class="sensores-telemetria-mini">
+              <div class="sensor-tele-pill"><span>Sensor A1</span><strong id="tele-dist-e1">-- cm</strong></div>
+              <div class="sensor-tele-pill"><span>Sensor A2</span><strong id="tele-dist-e2">-- cm</strong></div>
+              <div class="sensor-tele-pill"><span>Sensor B1</span><strong id="tele-dist-e3">-- cm</strong></div>
+              <div class="sensor-tele-pill"><span>Sensor B2</span><strong id="tele-dist-e4">-- cm</strong></div>
+              <div class="sensor-tele-pill"><span>Barrera Entrada</span><strong
+                  id="tele-barrera-entrada">Cerrada</strong></div>
+              <div class="sensor-tele-pill"><span>Barrera Salida</span><strong id="tele-barrera-salida">Cerrada</strong>
+              </div>
+            </div>
+            <div id="monitoreo-historial-mediciones"
+              style="font-family:var(--font-mono);font-size:0.78rem;color:var(--muted);">
+              Esperando registro de mediciones en tiempo real...
+            </div>
+          </div>
+
+          <div class="monitoreo-panel-card">
+            <h3>Mecanismo de comunicación Hardware &harr; Web</h3>
+            <p style="font-size:0.93rem;line-height:1.65;color:var(--muted);margin:0;">
+              El microcontrolador <strong>ESP32</strong> se conecta por WiFi (2.4 GHz) y envía cada 800 ms un paquete
+              JSON mediante <code>HTTP POST /api/estado</code> con las distancias ultrasónicas y el estado de las
+              barreras. El servidor <strong>Node.js</strong> persiste los datos en <code>datos.json</code>, responde con
+              órdenes pendientes del Kiosco o Admin, y la web consulta <code>GET /api/kiosco/resumen</code> cada 2
+              segundos para actualizar el dashboard sin recargar la página.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           7. PROCESO DE DESARROLLO (#desarrollo)
+           ========================================================= -->
+      <section id="desarrollo" class="section-block">
+        <div class="section-header-split">
+          <div>
+            <span class="section-kicker">07 · Proceso de Desarrollo</span>
+            <h2 class="section-title">De la idea al prototipo funcional</h2>
+          </div>
+          <p class="section-subtitle">
+            Registro visual de las cinco etapas de construcción, montaje, programación y validación física.
+          </p>
+        </div>
+
+        <!-- Etapa 1: Componentes electrónicos utilizados -->
+        <div class="etapa-bloque-wrapper">
+          <div class="etapa-bloque-header">
+            <span class="section-kicker" style="margin-bottom:0;">Etapa 1</span>
+            <h3>Componentes electrónicos utilizados</h3>
+            <p>Selección y verificación individual de todos los componentes electrónicos necesarios para la detección
+              vehicular, control automatizado de acceso, señalización visual/sonora y transmisión de datos en tiempo
+              real.</p>
+          </div>
+
+          <div class="componentes-evidencia-grid">
+            <div class="comp-evidencia-card">
+              <div class="comp-evidencia-img-wrap">
+                <img src="assets/images/esp32.webp" alt="Microcontrolador ESP32 con WiFi/Bluetooth">
+              </div>
+              <span>Microcontrolador ESP32 con WiFi/Bluetooth</span>
+            </div>
+            <div class="comp-evidencia-card">
+              <div class="comp-evidencia-img-wrap">
+                <img src="assets/images/sensor.webp" alt="Sensores ultrasónicos HC-SR04">
+              </div>
+              <span>Sensores ultrasónicos HC-SR04</span>
+            </div>
+            <div class="comp-evidencia-card">
+              <div class="comp-evidencia-img-wrap">
+                <img src="assets/images/infrarrojo.jpg" alt="Sensor infrarrojo de obstáculos MH-B">
+              </div>
+              <span>Sensor infrarrojo de obstáculos MH-B</span>
+            </div>
+            <div class="comp-evidencia-card">
+              <div class="comp-evidencia-img-wrap">
+                <img src="assets/images/servo.jpg" alt="Micro servomotores SG90 para barreras">
+              </div>
+              <span>Micro servomotores SG90 para barreras</span>
+            </div>
+            <div class="comp-evidencia-card">
+              <div class="comp-evidencia-img-wrap">
+                <img src="assets/images/lcd_2.jpg" alt="Pantalla LCD 16x2 con interfaz I2C">
+              </div>
+              <span>Pantalla LCD 16x2 con interfaz I2C</span>
+            </div>
+            <div class="comp-evidencia-card">
+              <div class="comp-evidencia-img-wrap">
+                <img src="assets/images/led_rojo_verde.webp" alt="LEDs indicadores de estado libre/ocupado">
+              </div>
+              <span>LEDs indicadores de estado libre/ocupado</span>
+            </div>
+            <div class="comp-evidencia-card">
+              <div class="comp-evidencia-img-wrap">
+                <img src="assets/images/buzzer.jpg" alt="Módulo buzzer para alertas sonoras">
+              </div>
+              <span>Módulo buzzer para alertas sonoras</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Etapas 2 a 5 -->
+        <div class="etapas-evidencia-grid">
+          <div class="desarrollo-card">
+            <div class="media-placeholder-box">
+              <img src="assets/images/progreso 1.jpg" alt="Montaje electrónico en protoboard">
+            </div>
+            <h3>Etapa 2 — Montaje electrónico en protoboard</h3>
+            <p>Primer ensamblaje en protoboard para validar las conexiones del ESP32, lectura de sensores, conmutación
+              de LEDs verde/rojo y comunicación I2C con la pantalla LCD.</p>
+          </div>
+
+          <div class="desarrollo-card">
+            <div class="media-placeholder-box">
+              <img src="assets/images/programacion_ide.jpg" alt="Programación y calibración en Arduino IDE">
+            </div>
+            <h3>Etapa 3 — Programación y calibración en Arduino IDE</h3>
+            <p>Desarrollo del código en Arduino IDE (CANTIDAD_PLAZAS = 4), configuración de pines TRIG/ECHO y
+              calibración de las lecturas de distancia en centímetros desde el Monitor Serie en tiempo real.</p>
+          </div>
+
+          <div class="desarrollo-card">
+            <div class="media-placeholder-box">
+              <img src="assets/images/prueba_sensor.jpg" alt="Pruebas de detección y respuesta">
+            </div>
+            <h3>Etapa 4 — Pruebas de detección y respuesta</h3>
+            <p>Validación funcional simulando el ingreso de vehículos: al detectar proximidad, el sistema activa la
+              alerta, cambia el LED indicador de verde a rojo y actualiza los contadores de plazas libres y ocupadas.
+            </p>
+          </div>
+
+          <div class="desarrollo-card">
+            <div class="media-placeholder-box">
+              <img src="assets/images/IMG-20261125-WA0008_2.jpg" alt="Prototipo electrónico integrado de 4 plazas">
+            </div>
+            <h3>Etapa 5 — Prototipo electrónico integrado (4 plazas)</h3>
+            <p>Sistema completo interconectado con los 4 sensores ultrasónicos HC-SR04, sensor infrarrojo, 2
+              servomotores para barreras, buzzer, LEDs por puesto y pantalla LCD mostrando el estado general ('Libres: 4
+              de 4 | Ocupadas: 0').</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           8. DESARROLLO TECNOLÓGICO Y CÓDIGO (#codigo)
+           ========================================================= -->
+      <section id="codigo" class="section-block">
+        <div class="section-header-split">
+          <div>
+            <span class="section-kicker">08 · Desarrollo Tecnológico</span>
+            <h2 class="section-title">Lógica algorítmica y código fuente</h2>
+          </div>
+          <p class="section-subtitle">
+            Evolución técnica desde el pseudocódigo en PSeInt y la lógica en Java hasta el firmware en ESP32.
+          </p>
+        </div>
+
+        <div class="codigo-tabs-bar">
+          <div class="codigo-tabs-group" role="tablist">
+            <button type="button" class="codigo-tab-btn active" data-tab="pseint">PSeInt (Pseudocódigo)</button>
+            <button type="button" class="codigo-tab-btn" data-tab="java">Java (Algoritmo)</button>
+            <button type="button" class="codigo-tab-btn" data-tab="esp32">Electrónica (ESP32 / Arduino)</button>
+          </div>
+
+          <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="btn-primary-signal">
+            <span>Ver repositorio en GitHub</span>
+          </a>
+        </div>
+
+        <div class="codigo-panel active" id="tab-panel-pseint">
+          <p>Modelado inicial del algoritmo para verificar disponibilidad en los 4 espacios, recomendar plaza y
+            controlar la apertura de barrera:</p>
+          <pre class="codigo-pre">Algoritmo ParkSense32_Control
+    Definir plazas Como Entero
+    Dimension plazas[4]
+    Definir i, libres, recomendado Como Entero
+
+    libres &lt;- 0
+    recomendado &lt;- 0
+
+    Para i &lt;- 1 Hasta 4 Con Paso 1 Hacer
+        Si plazas[i] = 0 Entonces
+            libres &lt;- libres + 1
+            Si recomendado = 0 Entonces
+                recomendado &lt;- i
+            FinSi
+        FinSi
+    FinPara
+
+    Si libres &gt; 0 Entonces
+        Escribir "Espacios libres: ", libres
+        Escribir "Espacio recomendado: ", recomendado
+        Escribir "Abriendo barrera de entrada..."
+    SiNo
+        Escribir "ESTACIONAMIENTO COMPLETO - Barrera cerrada"
+    FinSi
+FinAlgoritmo</pre>
+        </div>
+
+        <div class="codigo-panel" id="tab-panel-java">
+          <p>Traducción orientada a objetos en Java de la lógica de asignación de bahías y validación de acceso:</p>
+          <pre class="codigo-pre">public class GestorParqueadero {
+    private final boolean[] plazasOcupadas = new boolean[4];
+    private final String[] codigos = {"A1", "A2", "B1", "B2"};
+
+    public String recomendarEspacio() {
+        for (int i = 0; i &lt; plazasOcupadas.length; i++) {
+            if (!plazasOcupadas[i]) {
+                return codigos[i];
+            }
+        }
+        return null; // Estacionamiento lleno
+    }
+
+    public int contarLibres() {
+        int libres = 0;
+        for (boolean ocupada : plazasOcupadas) {
+            if (!ocupada) libres++;
+        }
+        return libres;
+    }
+}</pre>
+        </div>
+
+        <div class="codigo-panel" id="tab-panel-esp32">
+          <p>Extracto real del firmware en <code>esp32_smart_parking.ino</code> para lectura ultrasónica, envío HTTP y
+            cierre automático de barrera:</p>
+          <pre class="codigo-pre">// Lectura de sensores ultrasónicos y sincronización con la web cada 800 ms
+for (int plaza = 0; plaza &lt; CANTIDAD_PLAZAS; plaza++) {
+  gestionarBarreras();
+  distancias[plaza] = obtenerDistanciaPromedio(pinesTrig[plaza], pinesEcho[plaza]);
+  plazasOcupadas[plaza] = detectarVehiculo(distancias[plaza]);
+  actualizarLeds(plaza, plazasOcupadas[plaza]);
+}
+
+// Al terminar el registro en el Kiosco, el servidor envía "abrir_auto":
+// La barrera sube a 90° y el sensor la baja cuando el vehículo termina de pasar.</pre>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           9. RESULTADOS Y APLICACIONES (#resultados)
+           ========================================================= -->
+      <section id="resultados" class="section-block">
+        <div class="section-header-split">
+          <div>
+            <span class="section-kicker">09 · Resultados y Aplicaciones</span>
+            <h2 class="section-title">Logros validados y proyección futura</h2>
+          </div>
+          <p class="section-subtitle">
+            Evaluación del prototipo tras pruebas de integración entre maqueta física, servidor local y aplicación web.
+          </p>
+        </div>
+
+        <div class="resultados-grid">
+          <div class="info-card-clean">
+            <h3>Logros alcanzados con el prototipo</h3>
+            <p>
+              Se logró una lectura precisa de distancias en centímetros por cada plaza (umbral &le; 12 cm),
+              accionamiento automático y suave de las barreras con servomotores SG90, alertas visuales/sonoras
+              inmediatas y sincronización instantánea con el dashboard web.
+            </p>
+          </div>
+          <div class="info-card-clean">
+            <h3>Pruebas realizadas y resultados observados</h3>
+            <p>
+              Las pruebas validaron el cambio automático de LEDs verde a rojo al detectar proximidad, actualización en
+              vivo de la pantalla LCD 16x2 ('Libres: X de 4 | Ocupadas: Y'), alarma acústica con buzzer ante ingresos en
+              contramano por sensor IR y control remoto desde el Panel Admin.
+            </p>
+          </div>
+          <div class="info-card-clean">
+            <h3>Aplicaciones prácticas del producto</h3>
+            <p>
+              Implementable en centros comerciales (como La Piazza), edificios corporativos, clínicas, universidades y
+              conjuntos residenciales que requieran optimizar flujos vehiculares con bajo costo de hardware.
+            </p>
+          </div>
+          <div class="info-card-clean">
+            <h3>Limitaciones actuales y mejoras futuras</h3>
+            <p>
+              La maqueta actual cubre 4 plazas mediante red WiFi local. Como mejoras futuras se proyecta escalabilidad
+              modular a 32+ plazas, reconocimiento automático de placas por cámara (ANPR/OCR) y notificaciones móviles
+              para conductores.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           10. NUESTRO EQUIPO (#equipo)
+           ========================================================= -->
+      <section id="equipo" class="section-block">
+        <div class="section-header-split">
+          <div>
+            <span class="section-kicker">10 · Nuestro Equipo</span>
+            <h2 class="section-title">Talento detrás de ParkSense 32</h2>
+          </div>
+          <p class="section-subtitle">
+            Equipo de trabajo responsable de la dirección, arquitectura web, electrónica, maqueta y validación integral.
+          </p>
+        </div>
+
+        <div class="equipo-grid">
+          <div class="equipo-card equipo-lider">
+            <div class="equipo-avatar-box">
+              <img src="assets/images/pablo.jpg" alt="Pablo Carreño"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="media-placeholder-fallback"><strong>Foto</strong><span>assets/images/pablo.jpg</span></div>
+            </div>
+            <span class="equipo-rol-badge">Líder · Director de Proyecto</span>
+            <h3>Pablo Carreño</h3>
+            <p>Dirección general, coordinación del equipo, planificación de entregables y supervisión del proyecto.</p>
+          </div>
+
+          <div class="equipo-card">
+            <div class="equipo-avatar-box">
+              <img src="assets/images/cristhian.png" alt="Cristhian Palma"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="media-placeholder-fallback"><strong>Foto</strong><span>assets/images/cristhian.png</span>
+              </div>
+            </div>
+            <span class="equipo-rol-badge">Arquitecto Full-Stack &amp; IoT</span>
+            <h3>Cristhian Palma</h3>
+            <p>Desarrollo integral de la plataforma web, servidor Node.js, programación del firmware ESP32 e integración
+              completa hardware-software.</p>
+          </div>
+
+          <div class="equipo-card">
+            <div class="equipo-avatar-box">
+              <img src="assets/images/merizalde.jpg" alt="Cristhoper Merizalde"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="media-placeholder-fallback"><strong>Foto</strong><span>assets/images/merizalde.jpg</span>
+              </div>
+            </div>
+            <span class="equipo-rol-badge">Diseño y Maqueta</span>
+            <h3>Cristhoper Merizalde</h3>
+            <p>Diseño estructural de la maqueta física, trazado de carriles, delimitación de bahías A1–B2 y acabados
+              arquitectónicos.</p>
+          </div>
+
+          <div class="equipo-card">
+            <div class="equipo-avatar-box">
+              <img src="assets/images/oyola.jpg" alt="Matias Oyola"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="media-placeholder-fallback"><strong>Foto</strong><span>assets/images/oyola.jpg</span></div>
+            </div>
+            <span class="equipo-rol-badge">Circuitos y Electrónica</span>
+            <h3>Matias Oyola</h3>
+            <p>Armado de circuito electrónico, distribución de pines, cableado de sensores HC-SR04 y soporte de
+              alimentación.</p>
+          </div>
+
+          <div class="equipo-card">
+            <div class="equipo-avatar-box">
+              <img src="assets/images/rios.jpeg" alt="Wilson Rios"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="media-placeholder-fallback"><strong>Foto</strong><span>assets/images/rios.jpeg</span></div>
+            </div>
+            <span class="equipo-rol-badge">Actuadores y Barreras</span>
+            <h3>Wilson Rios</h3>
+            <p>Acoplamiento mecánico y calibración angular de los servomotores SG90 en las barreras de entrada y salida.
+            </p>
+          </div>
+
+          <div class="equipo-card">
+            <div class="equipo-avatar-box">
+              <img src="assets/images/romero.png" alt="Jazmany Romero"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="media-placeholder-fallback"><strong>Foto</strong><span>assets/images/romero.png</span></div>
+            </div>
+            <span class="equipo-rol-badge">Calibración y QA</span>
+            <h3>Jazmany Romero</h3>
+            <p>Pruebas de lectura ultrasónica, ajuste de umbrales de detección IR, buzzer de contramano y control de
+              calidad.</p>
+          </div>
+
+          <div class="equipo-card">
+            <div class="equipo-avatar-box">
+              <img src="assets/images/vladimir.jpg" alt="Vladimir Criollo"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="media-placeholder-fallback"><strong>Foto</strong><span>assets/images/vladimir.jpg</span></div>
+            </div>
+            <span class="equipo-rol-badge">Algorítmica y Documentación</span>
+            <h3>Vladimir Criollo</h3>
+            <p>Desarrollo de pseudocódigo en PSeInt, traducción algorítmica a Java y documentación técnica del sistema.
+            </p>
+          </div>
+
+          <div class="equipo-card">
+            <div class="equipo-avatar-box">
+              <img src="assets/images/carlos.jpg" alt="Carlos Vega"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="media-placeholder-fallback"><strong>Foto</strong><span>assets/images/carlos.jpg</span></div>
+            </div>
+            <span class="equipo-rol-badge">Simulación y Validación</span>
+            <h3>Carlos Vega</h3>
+            <p>Validación del circuito en simulador, verificación de señalización LCD/LED y pruebas operativas de campo.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           11. CONTACTO (#contacto)
+           ========================================================= -->
+      <section id="contacto" class="section-block">
+        <div class="contacto-banner">
+          <div class="contacto-info-col">
+            <span class="section-kicker">11 · Contacto</span>
+            <h2>VialCore Tech · ParkSense 32</h2>
+            <p>
+              ¿Deseas implementar nuestro sistema inteligente en tu centro comercial o institución? Escríbenos
+              directamente o revisa nuestra presentación técnica.
+            </p>
+            <div class="contacto-badges">
+              <span>contacto@vialcoretech.com</span>
+              <span>La Piazza · Machala, Ecuador</span>
+            </div>
+            <div class="contacto-links-row">
+              <a href="https://github.com/" target="_blank" rel="noopener noreferrer"
+                class="social-chip-link">GitHub</a>
+              <a href="#simulacion" class="social-chip-link">Simulación</a>
+              <a href="#monitoreo" class="social-chip-link">Ver en vivo</a>
+            </div>
+          </div>
+
+          <form id="form-contacto-publico" class="contacto-form-col">
+            <div class="contacto-form-grid">
+              <input type="text" placeholder="Nombre o empresa" required class="contacto-input">
+              <input type="email" placeholder="Correo electrónico" required class="contacto-input">
+            </div>
+            <textarea rows="3" placeholder="Cuéntanos sobre tu estacionamiento (cantidad de plazas, ubicación...)"
+              required class="contacto-input"></textarea>
+            <button type="submit" class="btn-primary-signal">
+              <span>Enviar mensaje</span>
+            </button>
+            <div id="contacto-confirmacion" class="contacto-confirmacion oculto">
+              Mensaje enviado correctamente. Nos pondremos en contacto contigo pronto.
+            </div>
+          </form>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Pie de Página Modo Público con espacio reservado para código QR -->
+    <footer class="public-footer">
+      <div class="footer-wrap">
+        <div class="footer-left">
+          <p>&copy; 2026 VialCore Tech &bull; ParkSense 32.</p>
+          <small>Machala, Ecuador &bull; Sistema Automatizado de Gestión de Estacionamientos</small>
+        </div>
+        <div class="footer-right">
+          <div class="footer-qr-box">
+            <div class="footer-qr-slot">
+              <img src="assets/qr-web.png" alt="Código QR de acceso rápido a ParkSense 32"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <span class="company-logo-fallback" style="display:none;">QR</span>
+            </div>
+            <div>
+              <strong style="display:block;font-size:0.84rem;color:var(--ink);">Acceso rápido QR</strong>
+              <small style="font-size:0.74rem;color:var(--muted);">Ruta: public/assets/qr-web.png</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+
+  <!-- =========================================================
+       MODO 2: MODO ESTACIONAMIENTO (KIOSCO DE AUTOSERVICIO)
+       Interfaz táctil de entrada física con 8 opciones
+       ========================================================= -->
+  <div id="modo-kiosco" class="modo-seccion oculto">
+
+    <!-- Encabezado Fijo del Kiosco Táctil -->
+    <header class="kiosco-header-bar">
+      <div class="kiosco-header-left">
+        <div class="kiosco-brand">
+          <span class="kiosco-brand-icon">🚗</span>
+          <div>
+            <span class="kiosco-brand-title">ParkSense 32</span>
+            <small class="kiosco-brand-sub">TERMINAL DE AUTOSERVICIO ENTRADA</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="kiosco-header-center">
+        <div class="reloj-digital" id="kiosco-reloj-digital">--:--:--</div>
+        <div class="kiosco-resumen-rapido" id="kiosco-pill-disponibles">
+          <span class="punto-verde-pulso"></span>
+          <span id="kiosco-texto-disponibles">Cargando disponibilidad...</span>
+        </div>
+      </div>
+
+      <div class="kiosco-header-right"></div>
+    </header>
+
+    <!-- Contenedor Principal de Vistas del Kiosco -->
+    <main class="kiosco-main-body">
+
+      <!-- ================= VISTA: MENÚ PRINCIPAL (8 OPCIONES) ================= -->
+      <section id="kiosco-menu-principal" class="kiosco-subvista">
+        <div class="kiosco-bienvenida-box">
+          <h2>¡Bienvenido a ParkSense 32!</h2>
+          <p>Selecciona una opción en la pantalla para gestionar tu vehículo:</p>
+        </div>
+
+        <div class="kiosco-grid-opciones">
+
+          <!-- Opción 1 -->
+          <button class="kiosco-tile-btn tile-azul" data-opcion="1">
+            <div class="tile-icon">📊</div>
+            <div class="tile-text">
+              <span class="tile-num">OPCIÓN 1</span>
+              <h3>Consultar Disponibilidad</h3>
+              <p>Revisa en tiempo real cuántos de los 4 espacios están libres.</p>
+            </div>
+          </button>
+
+          <!-- Opción 2 -->
+          <button class="kiosco-tile-btn tile-verde" data-opcion="2">
+            <div class="tile-icon">🚗</div>
+            <div class="tile-text">
+              <span class="tile-num">OPCIÓN 2</span>
+              <h3>Registrar Entrada</h3>
+              <p>Ingresa tu placa para recibir recomendación y asignar tu espacio.</p>
+            </div>
+          </button>
+
+          <!-- Opción 3 -->
+          <button class="kiosco-tile-btn tile-rojo" data-opcion="3">
+            <div class="tile-icon">🏁</div>
+            <div class="tile-text">
+              <span class="tile-num">OPCIÓN 3</span>
+              <h3>Registrar Salida</h3>
+              <p>Confirma la salida de tu vehículo y libera el espacio ocupado.</p>
+            </div>
+          </button>
+
+          <!-- Opción 4 -->
+          <button class="kiosco-tile-btn tile-morado" data-opcion="4">
+            <div class="tile-icon">🔍</div>
+            <div class="tile-text">
+              <span class="tile-num">OPCIÓN 4</span>
+              <h3>Consultar un Espacio</h3>
+              <p>Revisa el estado individual de los lugares A1, A2, B1 o B2.</p>
+            </div>
+          </button>
+
+          <!-- Opción 5 (Funcionalidad Adicional Valiosa) -->
+          <button class="kiosco-tile-btn tile-cyan" data-opcion="5">
+            <div class="tile-icon">📍</div>
+            <div class="tile-text">
+              <span class="tile-num">OPCIÓN 5</span>
+              <h3>¿Dónde Estacioné?</h3>
+              <p>Localizador rápido: ingresa tu placa y te indicamos tu espacio.</p>
+            </div>
+          </button>
+
+          <!-- Opción 6 (Asistencia en Cabina) -->
+          <button class="kiosco-tile-btn tile-gris" data-opcion="8">
+            <div class="tile-icon">🛎️</div>
+            <div class="tile-text">
+              <span class="tile-num">OPCIÓN 6</span>
+              <h3>Asistencia en Cabina</h3>
+              <p>Llama al operador o reporta un problema con tu espacio.</p>
+            </div>
+          </button>
+
+        </div>
+      </section>
+
+      <!-- ================= VISTA: OPCIÓN 1 (CONSULTAR DISPONIBILIDAD GENERAL) ================= -->
+      <section id="kiosco-vista-opcion1" class="kiosco-subvista oculto">
+        <div class="vista-cabecera-accion">
+          <button class="btn-volver-kiosco btn-regresar-menu">
+            &larr; Volver al Menú
+          </button>
+          <h2>Disponibilidad General del Estacionamiento</h2>
+        </div>
+
+        <div class="kiosco-totales-strip">
+          <div class="tot-box">
+            <span class="tot-val" id="k1-total">4</span>
+            <span class="tot-lab">Espacios Totales</span>
+          </div>
+          <div class="tot-box tot-libres">
+            <span class="tot-val" id="k1-libres">3</span>
+            <span class="tot-lab">Disponibles</span>
+          </div>
+          <div class="tot-box tot-ocupados">
+            <span class="tot-val" id="k1-ocupados">1</span>
+            <span class="tot-lab">Ocupados</span>
+          </div>
+        </div>
+
+        <!-- Tarjetas Táctiles A1..B2 -->
+        <div class="kiosco-slots-display" id="k1-slots-container">
+          <!-- Renderizado dinámico de A1 a B2 -->
+        </div>
+
+        <div class="kiosco-vista-footer-actions">
+          <button class="btn-kiosco-accion btn-accion-verde" id="btn-k1-ir-entrada">
+            🚗 Registrar Entrada de Vehículo &rarr;
+          </button>
+        </div>
+      </section>
+
+      <!-- ================= VISTA: OPCIÓN 2 (REGISTRAR ENTRADA) ================= -->
+      <section id="kiosco-vista-opcion2" class="kiosco-subvista oculto">
+        <div class="vista-cabecera-accion">
+          <button class="btn-volver-kiosco btn-regresar-menu">
+            &larr; Cancelar y Volver
+          </button>
+          <h2>Registrar Entrada de Vehículo</h2>
+        </div>
+
+        <!-- Contenedor de Pasos de Entrada -->
+        <div class="pasos-entrada-wrapper">
+
+          <!-- PASO 1: Ingreso de Placa -->
+          <div id="k2-paso1-identificacion" class="paso-caja">
+            <div class="paso-titulo">
+              <span class="paso-badge">Paso 1</span>
+              <h3>Identificación del Vehículo</h3>
+            </div>
+            <p class="paso-desc">Ingresa el número de placa de tu vehículo (ejemplo: ABC-1234):</p>
+
+            <div class="input-placa-box">
+              <input type="text" id="k2-input-placa" placeholder="ABC-1234" maxlength="10" autocomplete="off"
+                class="placa-grande-input">
+              <button id="k2-btn-verificar-placa" class="btn-kiosco-confirmar">
+                Continuar &rarr;
+              </button>
+            </div>
+
+            <!-- Teclado en pantalla táctil rápido -->
+            <div class="teclado-tactil" id="teclado-tactil-entrada">
+              <div class="teclado-fila">
+                <button type="button" class="btn-tecla">1</button>
+                <button type="button" class="btn-tecla">2</button>
+                <button type="button" class="btn-tecla">3</button>
+                <button type="button" class="btn-tecla">4</button>
+                <button type="button" class="btn-tecla">5</button>
+                <button type="button" class="btn-tecla">6</button>
+                <button type="button" class="btn-tecla">7</button>
+                <button type="button" class="btn-tecla">8</button>
+                <button type="button" class="btn-tecla">9</button>
+                <button type="button" class="btn-tecla">0</button>
+              </div>
+              <div class="teclado-fila">
+                <button type="button" class="btn-tecla">Q</button>
+                <button type="button" class="btn-tecla">W</button>
+                <button type="button" class="btn-tecla">E</button>
+                <button type="button" class="btn-tecla">R</button>
+                <button type="button" class="btn-tecla">T</button>
+                <button type="button" class="btn-tecla">Y</button>
+                <button type="button" class="btn-tecla">U</button>
+                <button type="button" class="btn-tecla">I</button>
+                <button type="button" class="btn-tecla">O</button>
+                <button type="button" class="btn-tecla">P</button>
+              </div>
+              <div class="teclado-fila">
+                <button type="button" class="btn-tecla">A</button>
+                <button type="button" class="btn-tecla">S</button>
+                <button type="button" class="btn-tecla">D</button>
+                <button type="button" class="btn-tecla">F</button>
+                <button type="button" class="btn-tecla">G</button>
+                <button type="button" class="btn-tecla">H</button>
+                <button type="button" class="btn-tecla">J</button>
+                <button type="button" class="btn-tecla">K</button>
+                <button type="button" class="btn-tecla">L</button>
+                <button type="button" class="btn-tecla">-</button>
+              </div>
+              <div class="teclado-fila">
+                <button type="button" class="btn-tecla">Z</button>
+                <button type="button" class="btn-tecla">X</button>
+                <button type="button" class="btn-tecla">C</button>
+                <button type="button" class="btn-tecla">V</button>
+                <button type="button" class="btn-tecla">B</button>
+                <button type="button" class="btn-tecla">N</button>
+                <button type="button" class="btn-tecla">M</button>
+                <button type="button" class="btn-tecla btn-tecla-accion" id="btn-tecla-borrar">⌫ Borrar</button>
+                <button type="button" class="btn-tecla btn-tecla-accion" id="btn-tecla-limpiar">Limpiar</button>
+              </div>
+            </div>
+
+            <div id="k2-mensaje-error-paso1" class="mensaje-alerta-kiosco oculto"></div>
+          </div>
+
+          <!-- PASO 2 Y 3: Recomendación Automática o Alerta de Último Espacio -->
+          <div id="k2-paso2-recomendacion" class="paso-caja oculto">
+            <div class="paso-titulo">
+              <span class="paso-badge">Paso 2</span>
+              <h3>Asignación de Espacio</h3>
+            </div>
+
+            <div id="k2-alerta-ultimo-espacio" class="alerta-ultimo-box oculto">
+              <span class="alerta-icon">&#9888;</span>
+              <div>
+                <strong>¡Atención! Solamente queda un espacio disponible.</strong>
+                <p id="k2-texto-ultimo-espacio">El espacio B2 es la única opción disponible para estacionar.</p>
+              </div>
+            </div>
+
+            <div id="k2-caja-recomendado-normal" class="recomendacion-tarjeta">
+              <div class="recom-icono">✨</div>
+              <div class="recom-contenido">
+                <h4>¡Bienvenido a ParkSense 32!</h4>
+                <p>Te recomendamos estacionarte en el espacio <strong id="k2-espacio-recomendado-tag"
+                    class="tag-espacio-grande">A2</strong>.</p>
+                <span>¿Deseas utilizar este espacio?</span>
+              </div>
+            </div>
+
+            <div class="recom-botones-opcion">
+              <button id="btn-k2-aceptar-recomendado" class="btn-kiosco-accion btn-accion-verde">
+                ✓ Aceptar Espacio Recomendado
+              </button>
+              <button id="btn-k2-elegir-otro" class="btn-kiosco-accion btn-accion-secundario">
+                Elegir Otro Espacio
+              </button>
+            </div>
+          </div>
+
+          <!-- PASO 4: Selección Manual de Espacio (Si no aceptó el recomendado) -->
+          <div id="k2-paso3-seleccion-manual" class="paso-caja oculto">
+            <div class="paso-titulo">
+              <span class="paso-badge">Paso 3</span>
+              <h3>Selección Manual de Espacio</h3>
+            </div>
+            <p>Selecciona uno de los espacios disponibles. Los espacios ocupados aparecen deshabilitados:</p>
+
+            <div class="manual-slots-grid" id="k2-manual-slots-grid">
+              <!-- Renderizado dinámico de A1 a B2 para seleccionar -->
+            </div>
+
+            <div class="acciones-manual-row">
+              <button id="btn-k2-volver-a-recom" class="btn-volver-kiosco">
+                &larr; Volver a recomendación
+              </button>
+            </div>
+          </div>
+
+          <!-- PASO 5: Confirmación Final -->
+          <div id="k2-paso4-confirmacion" class="paso-caja oculto">
+            <div class="paso-titulo">
+              <span class="paso-badge">Paso Final</span>
+              <h3>Confirmación de Entrada</h3>
+            </div>
+
+            <div class="ticket-confirmacion-kiosco">
+              <div class="ticket-header">
+                <h4>ParkSense 32 &bull; TICKET DE INGRESO</h4>
+                <span id="k2-confirm-nro-mov">MOV-0101</span>
+              </div>
+              <div class="ticket-cuerpo">
+                <div class="ticket-fila">
+                  <span>Vehículo / Placa:</span>
+                  <strong id="k2-confirm-placa">ABC-1234</strong>
+                </div>
+                <div class="ticket-fila">
+                  <span>Espacio Asignado:</span>
+                  <strong id="k2-confirm-espacio" class="espacio-destacado-text">A2</strong>
+                </div>
+                <div class="ticket-fila">
+                  <span>Fecha y Hora de Ingreso:</span>
+                  <strong id="k2-confirm-fechahora">24/11/2026 19:45:00</strong>
+                </div>
+                <div class="ticket-fila">
+                  <span>Estado:</span>
+                  <strong style="color: #00f5a0;">Confirmando asignación...</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="confirmacion-acciones-row">
+              <button id="btn-k2-completar-ingreso" class="btn-kiosco-accion btn-accion-verde btn-grande">
+                ✓ Confirmar y Abrir Barrera de Entrada
+              </button>
+            </div>
+          </div>
+
+          <!-- PANTALLA ÉXITO DE ENTRADA -->
+          <div id="k2-paso5-exito" class="paso-caja exito-box oculto">
+            <div class="exito-icono">🎉</div>
+            <h3>¡Entrada Registrada Exitosamente!</h3>
+            <p>Por favor, dirígete hacia tu espacio asignado:</p>
+            <div class="espacio-asignado-gigante" id="k2-exito-espacio-tag">A2</div>
+            <div class="barrera-aviso-anim">
+              <span class="barrera-pulse">🚧</span>
+              <span>La barrera servomotor se ha elevado. ¡Conduce a velocidad baja (10 km/h)!</span>
+            </div>
+            <button id="btn-k2-terminar" class="btn-kiosco-accion btn-accion-verde" style="margin-top: 20px;">
+              Finalizar y Regresar al Menú
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================= VISTA: OPCIÓN 3 (REGISTRAR SALIDA) ================= -->
+      <section id="kiosco-vista-opcion3" class="kiosco-subvista oculto">
+        <div class="vista-cabecera-accion">
+          <button class="btn-volver-kiosco btn-regresar-menu">
+            &larr; Volver al Menú
+          </button>
+          <h2>Registrar Salida de Vehículo</h2>
+        </div>
+
+        <div class="pasos-salida-wrapper">
+          <!-- Paso 1 Salida: Buscar Placa -->
+          <div id="k3-paso1-busqueda" class="paso-caja">
+            <h3>Ingresa la Placa del Vehículo que Desea Salir</h3>
+            <p>El sistema verificará el registro de entrada activo correspondiente:</p>
+
+            <div class="input-placa-box">
+              <input type="text" id="k3-input-placa" placeholder="ABC-1234" maxlength="10" autocomplete="off"
+                class="placa-grande-input">
+              <button id="k3-btn-buscar-vehiculo" class="btn-kiosco-confirmar">
+                Buscar Vehículo &rarr;
+              </button>
+            </div>
+
+            <!-- Teclado táctil para salida -->
+            <div class="teclado-tactil" id="teclado-tactil-salida">
+              <!-- Se replica funcionalidad por JS -->
+            </div>
+
+            <div id="k3-mensaje-error" class="mensaje-alerta-kiosco oculto"></div>
+          </div>
+
+          <!-- Paso 2 Salida: Resumen y Confirmación -->
+          <div id="k3-paso2-confirmacion" class="paso-caja oculto">
+            <div class="ticket-confirmacion-kiosco ticket-salida">
+              <div class="ticket-header">
+                <h4>ParkSense 32 &bull; CONFIRMACIÓN DE SALIDA</h4>
+                <span id="k3-salida-mov-id">MOV-0101</span>
+              </div>
+              <div class="ticket-cuerpo">
+                <div class="ticket-fila">
+                  <span>Placa del Vehículo:</span>
+                  <strong id="k3-salida-placa">ABC-1234</strong>
+                </div>
+                <div class="ticket-fila">
+                  <span>Espacio que Abandona:</span>
+                  <strong id="k3-salida-espacio" style="color: #38bdf8;">A2</strong>
+                </div>
+                <div class="ticket-fila">
+                  <span>Fecha y Hora de Ingreso:</span>
+                  <strong id="k3-salida-horaingreso">--:--:--</strong>
+                </div>
+                <div class="ticket-fila">
+                  <span>Tiempo Transcurrido:</span>
+                  <strong id="k3-salida-tiempoestancia">35 minutos</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="confirmacion-acciones-row">
+              <button id="btn-k3-confirmar-salida" class="btn-kiosco-accion btn-accion-rojo btn-grande">
+                🏁 Confirmar Salida y Elevar Barrera
+              </button>
+              <button id="btn-k3-cancelar-salida" class="btn-volver-kiosco">
+                Cancelar
+              </button>
+            </div>
+          </div>
+
+          <!-- Paso 3 Salida: Éxito -->
+          <div id="k3-paso3-exito" class="paso-caja exito-box oculto">
+            <div class="exito-icono">👋</div>
+            <h3>¡Salida Registrada con Éxito!</h3>
+            <p>El espacio <strong id="k3-exito-espacio-liberado" style="color: #00f5a0;">A2</strong> ha sido actualizado
+              a <strong>DISPONIBLE</strong>.</p>
+            <div class="barrera-aviso-anim">
+              <span class="barrera-pulse">🚧</span>
+              <span>Barrera de salida elevada. ¡Gracias por tu visita a ParkSense 32!</span>
+            </div>
+            <button id="btn-k3-terminar" class="btn-kiosco-accion btn-accion-verde" style="margin-top: 20px;">
+              Finalizar y Regresar al Menú
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= VISTA: OPCIÓN 4 (CONSULTAR ESTADO DE UN ESPACIO) ================= -->
+      <section id="kiosco-vista-opcion4" class="kiosco-subvista oculto">
+        <div class="vista-cabecera-accion">
+          <button class="btn-volver-kiosco btn-regresar-menu">
+            &larr; Volver al Menú
+          </button>
+          <h2>Consultar Estado Individual de un Espacio</h2>
+        </div>
+
+        <p class="instruccion-kiosco">Toca cualquiera de los 4 espacios para consultar su información detallada:</p>
+
+        <div class="kiosco-selector-espacios-row">
+          <button class="btn-selector-espacio active" data-espacio-id="1">Espacio A1</button>
+          <button class="btn-selector-espacio" data-espacio-id="2">Espacio A2</button>
+          <button class="btn-selector-espacio" data-espacio-id="3">Espacio B1</button>
+          <button class="btn-selector-espacio" data-espacio-id="4">Espacio B2</button>
+        </div>
+
+        <div class="detalle-espacio-card glass-panel" id="k4-detalle-card">
+          <div class="detalle-card-header">
+            <h3 id="k4-card-codigo">Espacio A1</h3>
+            <span id="k4-card-estado-pill" class="espacio-estado-pill badge-green">DISPONIBLE</span>
+          </div>
+
+          <div class="detalle-card-body" id="k4-card-body">
+            <!-- Inyectado dinámicamente por JS -->
+          </div>
+
+          <div class="detalle-card-footer" id="k4-card-footer">
+            <button id="btn-k4-asignar-este" class="btn-kiosco-accion btn-accion-verde">
+              🚗 Asignar este Espacio para mi Vehículo
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= VISTA: OPCIÓN 5 (LOCALIZADOR "¿DÓNDE ESTACIONÉ?") ================= -->
+      <section id="kiosco-vista-opcion5" class="kiosco-subvista oculto">
+        <div class="vista-cabecera-accion">
+          <button class="btn-volver-kiosco btn-regresar-menu">
+            &larr; Volver al Menú
+          </button>
+          <h2>Localizador de Vehículo ("¿Dónde estacioné?")</h2>
+        </div>
+
+        <div class="paso-caja">
+          <p>¿Olvidaste en qué espacio dejaste tu vehículo? Ingresa tu número de placa:</p>
+
+          <div class="input-placa-box">
+            <input type="text" id="k5-input-placa" placeholder="Ej: ABC-1234" maxlength="10" autocomplete="off"
+              class="placa-grande-input">
+            <button id="btn-k5-localizar" class="btn-kiosco-confirmar">
+              Localizar &rarr;
+            </button>
+          </div>
+
+          <div id="k5-resultado-box" class="resultado-localizador glass-panel oculto">
+            <div class="localizador-icon">📍</div>
+            <div class="localizador-info">
+              <h4>Tu vehículo está en el espacio: <strong id="k5-res-espacio"
+                  style="color: #00f2fe; font-size: 1.8rem;">A2</strong></h4>
+              <p id="k5-res-detalles">Hora de ingreso: 18:30:10 &bull; Estancia: 45 min</p>
+              <div class="croquis-mini-guia" id="k5-res-croquis-guia">
+                <!-- Mini croquis que resalta el espacio del conductor -->
+              </div>
+            </div>
+          </div>
+
+          <div id="k5-error-box" class="mensaje-alerta-kiosco oculto"></div>
+        </div>
+      </section>
+
+      <!-- ================= VISTA: OPCIÓN 6 (TARIFAS Y CONSULTA DE ESTANCIA) ================= -->
+      <section id="kiosco-vista-opcion6" class="kiosco-subvista oculto">
+        <div class="vista-cabecera-accion">
+          <button class="btn-volver-kiosco btn-regresar-menu">
+            &larr; Volver al Menú
+          </button>
+          <h2>Tarifas y Consulta de Estancia</h2>
+        </div>
+
+        <div class="tarifas-cards-grid">
+          <div class="tarifa-card glass-panel">
+            <div class="tarifa-badge">CLIENTES LA PIAZZA</div>
+            <h3>Primeros 30 Minutos</h3>
+            <div class="tarifa-precio">GRATIS</div>
+            <p>Tiempo de cortesía para compras rápidas y recogida de pedidos.</p>
+          </div>
+
+          <div class="tarifa-card glass-panel">
+            <div class="tarifa-badge">TARIFA ESTÁNDAR</div>
+            <h3>Por Hora o Fracción</h3>
+            <div class="tarifa-precio">$1.00 <small>/ hora</small></div>
+            <p>Aplicable a partir del minuto 31 de estancia vehicular.</p>
+          </div>
+
+          <div class="tarifa-card glass-panel">
+            <div class="tarifa-badge">BENEFICIO</div>
+            <h3>Ticket Digital</h3>
+            <div class="tarifa-precio">$0.00</div>
+            <p>Cero costos por reposición de ticket de papel perdido.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= VISTA: OPCIÓN 7 (NORMAS DE CIRCULACIÓN) ================= -->
+      <section id="kiosco-vista-opcion7" class="kiosco-subvista oculto">
+        <div class="vista-cabecera-accion">
+          <button class="btn-volver-kiosco btn-regresar-menu">
+            &larr; Volver al Menú
+          </button>
+          <h2>Guía Rápida y Normas de Seguridad</h2>
+        </div>
+
+        <div class="normas-grid">
+          <div class="norma-item glass-panel">
+            <span class="norma-num">1</span>
+            <div>
+              <strong>Velocidad Máxima 10 km/h:</strong>
+              <p>Circula con precaución y mantén una velocidad moderada en carriles de acceso y maniobra.</p>
+            </div>
+          </div>
+
+          <div class="norma-item glass-panel">
+            <span class="norma-num">2</span>
+            <div>
+              <strong>Espera la Elevación Completa de la Barrera:</strong>
+              <p>No avances hasta que el servomotor haya elevado la barrera a 90° para evitar incidentes.</p>
+            </div>
+          </div>
+
+          <div class="norma-item glass-panel">
+            <span class="norma-num">3</span>
+            <div>
+              <strong>Estaciona Centrado entre Líneas:</strong>
+              <p>Permite que el sensor ultrasónico detecte correctamente tu vehículo y respeta el espacio contiguo.</p>
+            </div>
+          </div>
+
+          <div class="norma-item glass-panel">
+            <span class="norma-num">4</span>
+            <div>
+              <strong>Uso Obligatorio de Luces Bajas:</strong>
+              <p>Enciende tus luces bajas para garantizar visibilidad mutua con otros conductores y peatones.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= VISTA: OPCIÓN 8 (ASISTENCIA EN CABINA) ================= -->
+      <section id="kiosco-vista-opcion8" class="kiosco-subvista oculto">
+        <div class="vista-cabecera-accion">
+          <button class="btn-volver-kiosco btn-regresar-menu">
+            &larr; Volver al Menú
+          </button>
+          <h2>Asistencia en Cabina y Reporte de Incidencias</h2>
+        </div>
+
+        <div class="asistencia-caja-wrapper glass-panel">
+          <h3>¿Necesitas ayuda inmediata?</h3>
+          <p>Presiona el botón para solicitar la presencia del operador del estacionamiento en tu punto de acceso:</p>
+
+          <button id="btn-k8-llamar-operador" class="btn-kiosco-accion btn-accion-rojo btn-grande"
+            style="font-size: 1.25rem;">
+            🛎️ SOLICITAR ASISTENCIA DEL OPERADOR
+          </button>
+
+          <div class="divider-o"><span>O REPORTA UN INCONVENIENTE ESPECÍFICO</span></div>
+
+          <div class="form-reporte-kiosco">
+            <select id="k8-tipo-incidencia" class="select-kiosco">
+              <option value="BARRERA_BLOQUEADA">La barrera no se elevó</option>
+              <option value="ESPACIO_OBSTACULIZADO">El espacio asignado está ocupado indebidamente</option>
+              <option value="PLACA_NO_RECONOCIDA">Problema con la placa de mi vehículo</option>
+              <option value="OTRO">Otra consulta operativa</option>
+            </select>
+            <input type="text" id="k8-placa-asistencia" placeholder="Tu placa (opcional)" maxlength="10"
+              class="input-kiosco-md">
+            <button id="btn-k8-enviar-reporte" class="btn-kiosco-confirmar">
+              Enviar Reporte a la Administración
+            </button>
+          </div>
+
+          <div id="k8-mensaje-confirmacion" class="mensaje-exito-kiosco oculto"></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+
+  <!-- =========================================================
+       MODO 3: PANEL DE ADMINISTRACIÓN PROTEGIDO
+       Exclusivo para el operador / administrador autorizado
+       ========================================================= -->
+  <div id="modo-admin" class="modo-seccion oculto">
+
+    <header class="admin-top-nav glass-panel">
+      <div class="admin-nav-left">
+        <span class="admin-shield-icon">🛡️</span>
+        <div>
+          <h2>Panel de Control y Auditoría</h2>
+          <span class="admin-subtext">Sesión autorizada: <strong id="admin-user-tag">cristhian</strong></span>
+        </div>
+      </div>
+
+      <div class="admin-nav-center">
+        <!-- Switch de Modos para el Admin -->
+        <div class="selector-modos-admin">
+          <button id="btn-admin-ir-publico" class="btn-admin-switch">
+            🌐 Ir al Modo Público
+          </button>
+          <button id="btn-admin-ir-kiosco" class="btn-admin-switch">
+            🚗 Ir al Modo Kiosco
+          </button>
+        </div>
+      </div>
+
+      <div class="admin-nav-right">
+        <button id="btn-cerrar-sesion-admin" class="btn-peligro-sm">
+          🚪 Cerrar Sesión
+        </button>
+      </div>
+    </header>
+
+    <main class="admin-content-body">
+
+      <!-- Resumen Métrico Admin -->
+      <section class="admin-stats-grid">
+        <div class="stat-box glass-panel">
+          <span class="stat-number" id="stat-total-entradas">0</span>
+          <span class="stat-tag">Total Entradas Registradas</span>
+        </div>
+        <div class="stat-box glass-panel">
+          <span class="stat-number" id="stat-total-salidas">0</span>
+          <span class="stat-tag">Total Salidas Registradas</span>
+        </div>
+        <div class="stat-box glass-panel">
+          <span class="stat-number" id="stat-pico-aforo">0</span>
+          <span class="stat-tag">Pico Máximo de Ocupación</span>
+        </div>
+        <div class="stat-box glass-panel">
+          <span class="stat-number" id="stat-incidencias-pendientes">0</span>
+          <span class="stat-tag">Alertas / Asistencias</span>
+        </div>
+      </section>
+
+      <!-- Gestión de los 4 Espacios -->
+      <section class="admin-block glass-panel">
+        <div class="admin-block-header">
+          <h3>Gestión en Vivo de los 4 Espacios</h3>
+          <span class="admin-hint">Permite desocupar forzadamente o cambiar a mantenimiento/reservado</span>
+        </div>
+
+        <div class="admin-espacios-grid" id="admin-espacios-cards">
+          <!-- Renderizado dinámico de A1 a B2 -->
+        </div>
+      </section>
+
+      <!-- Control Remoto de Servomotores -->
+      <section class="admin-block glass-panel">
+        <div class="admin-block-header">
+          <h3>Control Remoto de Barreras (Servomotores SG90)</h3>
+          <span class="admin-hint">Para emergencias o vehículos de mantenimiento</span>
+        </div>
+
+        <div class="controles-barreras-fila">
+          <div class="barrera-item-control glass-panel">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+              <strong>Barrera de Entrada:</strong>
+              <span id="admin-estado-barrera-entrada" class="espacio-estado-pill badge-red">CERRADA</span>
+            </div>
+            <div class="btn-group-barreras">
+              <button class="btn-barrera-accion btn-abrir" onclick="controlarBarrera('entrada', 'abrir')">Subir
+                (Abrir)</button>
+              <button class="btn-barrera-accion btn-cerrar" onclick="controlarBarrera('entrada', 'cerrar')">Bajar
+                (Cerrar)</button>
+            </div>
+          </div>
+
+          <div class="barrera-item-control glass-panel">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+              <strong>Barrera de Salida:</strong>
+              <span id="admin-estado-barrera-salida" class="espacio-estado-pill badge-red">CERRADA</span>
+            </div>
+            <div class="btn-group-barreras">
+              <button class="btn-barrera-accion btn-abrir" onclick="controlarBarrera('salida', 'abrir')">Subir
+                (Abrir)</button>
+              <button class="btn-barrera-accion btn-cerrar" onclick="controlarBarrera('salida', 'cerrar')">Bajar
+                (Cerrar)</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Historial de Auditoría de Movimientos -->
+      <section class="admin-block glass-panel">
+        <div class="admin-block-header flex-between">
+          <div>
+            <h3>Historial Permanente de Movimientos</h3>
+            <span class="admin-hint">Registros correlativos no volátiles de entradas y salidas</span>
+          </div>
+
+          <div class="admin-historial-actions">
+            <button id="btn-descargar-csv" class="btn-accion-verde btn-sm"
+              title="Descargar reporte en formato Excel/CSV">
+              📥 Descargar Reporte CSV
+            </button>
+            <button id="btn-cambiar-credenciales" class="btn-accion-secundario btn-sm">
+              🔑 Cambiar Clave / PIN
+            </button>
+          </div>
+        </div>
+
+        <!-- Filtros de Búsqueda -->
+        <div class="admin-filtros-row">
+          <input type="text" id="filtro-placa-admin" placeholder="Buscar por placa (ej: ABC-1234)" class="filtro-input">
+          <select id="filtro-espacio-admin" class="filtro-select">
+            <option value="">Todos los espacios</option>
+            <option value="A1">Espacio A1</option>
+            <option value="A2">Espacio A2</option>
+            <option value="B1">Espacio B1</option>
+            <option value="B2">Espacio B2</option>
+          </select>
+          <button id="btn-aplicar-filtros" class="btn-kiosco-confirmar" style="padding: 8px 16px;">
+            Buscar
+          </button>
+        </div>
+
+        <div class="tabla-historial-wrapper">
+          <table class="tabla-historial">
+            <thead>
+              <tr>
+                <th>Movimiento</th>
+                <th>Tipo</th>
+                <th>Placa</th>
+                <th>Espacio</th>
+                <th>Fecha y Hora</th>
+                <th>Estado</th>
+                <th>Estancia</th>
+              </tr>
+            </thead>
+            <tbody id="cuerpo-tabla-movimientos">
+              <tr>
+                <td colspan="7" class="tabla-vacia">Cargando movimientos...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+
+  <!-- =========================================================
+       MODALES DE SEGURIDAD Y GESTIÓN
+       ========================================================= -->
+
+  <!-- Modal 1: Desbloqueo Administrativo / PIN de Kiosco -->
+  <div id="modal-pin-seguridad" class="modal-overlay oculto" role="dialog" aria-modal="true">
+    <div class="modal-dialog-card glass-panel">
+      <div class="modal-dialog-header">
+        <h3>🔒 Acceso Administrativo Protegido</h3>
+        <button id="btn-cerrar-modal-pin" class="btn-cerrar-ico">&times;</button>
+      </div>
+
+      <div class="modal-dialog-body">
+        <p>Ingresa el <strong>PIN de desbloqueo</strong> o la contraseña de administrador:</p>
+
+        <form id="form-verificar-pin">
+          <div class="campo-grupo">
+            <label for="input-pin-seguridad">PIN / Contraseña de Gestión:</label>
+            <input type="password" id="input-pin-seguridad" placeholder="••••" required autocomplete="current-password"
+              class="input-grande-pin">
+          </div>
+
+          <div id="mensaje-error-pin" class="mensaje-error-box oculto"></div>
+
+          <div class="modal-dialog-actions">
+            <button type="button" id="btn-cancelar-pin" class="btn-volver-kiosco">Cancelar</button>
+            <button type="submit" class="btn-kiosco-confirmar">Verificar y Continuar &rarr;</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Cambiar Clave y PIN -->
+  <div id="modal-cambio-clave" class="modal-overlay oculto" role="dialog" aria-modal="true">
+    <div class="modal-dialog-card glass-panel">
+      <div class="modal-dialog-header">
+        <h3>🔑 Cambiar Credenciales de Administración</h3>
+        <button id="btn-cerrar-modal-clave" class="btn-cerrar-ico">&times;</button>
+      </div>
+
+      <div class="modal-dialog-body">
+        <form id="form-cambio-clave">
+          <div class="campo-grupo">
+            <label for="input-nuevo-usuario">Nombre de Usuario:</label>
+            <input type="text" id="input-nuevo-usuario" required class="form-input-kiosco">
+          </div>
+
+          <div class="campo-grupo">
+            <label for="input-nueva-password">Nueva Contraseña:</label>
+            <input type="password" id="input-nueva-password" required class="form-input-kiosco">
+          </div>
+
+          <div class="campo-grupo">
+            <label for="input-nuevo-pin">Nuevo PIN del Kiosco (4 dígitos):</label>
+            <input type="text" id="input-nuevo-pin" maxlength="6" placeholder="1234" required class="form-input-kiosco">
+          </div>
+
+          <div id="mensaje-clave-feedback" class="mensaje-error-box oculto"></div>
+
+          <div class="modal-dialog-actions">
+            <button type="button" id="btn-cancelar-clave" class="btn-volver-kiosco">Cancelar</button>
+            <button type="submit" class="btn-kiosco-confirmar">Guardar Credenciales</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lenis (Smooth Scroll) -->
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
+  <!-- GSAP y ScrollTrigger (Animaciones) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Lógica principal de ParkSense 32 -->
+  <script src="app.js"></script>
+  <script>
+    if (window.lucide) { lucide.createIcons(); }
+  </script>
+
+</body>
+
+</html>
