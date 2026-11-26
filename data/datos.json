@@ -1,0 +1,731 @@
+{
+  "espacios": [
+    {
+      "id": 1,
+      "codigo": "A1",
+      "ocupada": false,
+      "estado": "disponible",
+      "vehiculo": null,
+      "distanciaHardware": 25.4
+    },
+    {
+      "id": 2,
+      "codigo": "A2",
+      "ocupada": false,
+      "estado": "disponible",
+      "vehiculo": null,
+      "distanciaHardware": 8.1
+    },
+    {
+      "id": 3,
+      "codigo": "B1",
+      "ocupada": false,
+      "estado": "disponible",
+      "vehiculo": null,
+      "distanciaHardware": -1
+    },
+    {
+      "id": 4,
+      "codigo": "B2",
+      "ocupada": false,
+      "estado": "disponible",
+      "vehiculo": null,
+      "distanciaHardware": 291.7
+    }
+  ],
+  "movimientos": [
+    {
+      "id": "MOV-0126",
+      "tipo": "ADMIN_LIBERAR",
+      "placa": "SIN-PLACA",
+      "espacio": "A2",
+      "espacioId": 2,
+      "fechaHora": "26/11/2026, 10:26:28",
+      "timestamp": 1795706788542,
+      "estado": "CORREGIDO",
+      "notas": "Liberación administrativa forzada: 09673724"
+    },
+    {
+      "id": "MOV-0125",
+      "tipo": "ADMIN_LIBERAR",
+      "placa": "SENSOR-HW",
+      "espacio": "A2",
+      "espacioId": 2,
+      "fechaHora": "26/11/2026, 10:26:18",
+      "timestamp": 1795706778683,
+      "estado": "CORREGIDO",
+      "notas": "Liberación administrativa forzada: Liberado por administrador"
+    },
+    {
+      "id": "MOV-0124",
+      "tipo": "ADMIN_LIBERAR",
+      "placa": "ABC-1234",
+      "espacio": "A1",
+      "espacioId": 1,
+      "fechaHora": "25/11/2026, 23:53:44",
+      "timestamp": 1795668824402,
+      "estado": "CORREGIDO",
+      "notas": "Liberación administrativa forzada: Liberado por administrador"
+    },
+    {
+      "id": "MOV-0123",
+      "tipo": "ENTRADA",
+      "placa": "ABC-1234",
+      "espacio": "A1",
+      "espacioId": 1,
+      "fechaHora": "25/11/2026, 13:17:05",
+      "timestamp": 1795630625612,
+      "estado": "ACTIVO",
+      "notas": "Entrada registrada mediante autoservicio de estacionamiento"
+    },
+    {
+      "id": "MOV-0122",
+      "movimientoEntradaId": "MOV-0121",
+      "tipo": "SALIDA",
+      "placa": "ABC-1234",
+      "espacio": "A1",
+      "espacioId": 1,
+      "horaIngreso": "25/11/2026, 13:03:03",
+      "fechaHora": "25/11/2026, 13:03:38",
+      "timestamp": 1795629818119,
+      "tiempoEstanciaMinutos": 1,
+      "estado": "SALIDA_REGISTRADA",
+      "notas": "Salida confirmada por autoservicio. Tiempo de estancia: 1 min."
+    },
+    {
+      "id": "MOV-0121",
+      "tipo": "ENTRADA",
+      "placa": "ABC-1234",
+      "espacio": "A1",
+      "espacioId": 1,
+      "fechaHora": "25/11/2026, 13:03:03",
+      "timestamp": 1795629784012,
+      "estado": "SALIDA_REGISTRADA",
+      "notas": "Entrada registrada mediante autoservicio de estacionamiento"
+    },
+    {
+      "id": "MOV-0120",
+      "tipo": "ADMIN_LIBERAR",
+      "placa": "ABC-1234",
+      "espacio": "A1",
+      "espacioId": 1,
+      "fechaHora": "25/11/2026, 11:58:30",
+      "timestamp": 1795625910587,
+      "estado": "CORREGIDO",
+      "notas": "Liberación administrativa forzada: Liberado por administrador"
+    },
+    {
+      "id": "MOV-0119",
+      "tipo": "ENTRADA",
+      "placa": "ABC-1234",
+      "espacio": "A1",
+      "espacioId": 1,
+      "fechaHora": "25/11/2026, 11:26:32",
+      "timestamp": 1795623992521,
+      "estado": "ACTIVO",
+      "notas": "Entrada registrada mediante autoservicio de estacionamiento"
+    },
+    {
+      "id": "MOV-0118",
+      "tipo": "ADMIN_LIBERAR",
+      "placa": "ABC-4321",
+      "espacio": "B2",
+      "espacioId": 4,
+      "fechaHora": "25/11/2026, 08:10:39",
+      "timestamp": 1795612239748,
+      "estado": "CORREGIDO",
+      "notas": "Liberación administrativa forzada: Liberado por administrador"
+    },
+    {
+      "id": "MOV-0117",
+      "tipo": "ADMIN_LIBERAR",
+      "placa": "ABC-1232",
+      "espacio": "B1",
+      "espacioId": 3,
+      "fechaHora": "25/11/2026, 08:10:36",
+      "timestamp": 1795612236293,
+      "estado": "CORREGIDO",
+      "notas": "Liberación administrativa forzada: Liberado por administrador"
+    },
+    {
+      "id": "MOV-0116",
+      "tipo": "ADMIN_LIBERAR",
+      "placa": "ABC-1433",
+      "espacio": "A2",
+      "espacioId": 2,
+      "fechaHora": "25/11/2026, 08:10:19",
+      "timestamp": 1795612219088,
+      "estado": "CORREGIDO",
+      "notas": "Liberación administrativa forzada: Liberado por administrador"
+    },
+    {
+      "id": "MOV-0115",
+      "movimientoEntradaId": "MOV-0111",
+      "tipo": "SALIDA",
+      "placa": "ABC-1234",
+      "espacio": "A1",
+      "espacioId": 1,
+      "horaIngreso": "25/11/2026, 08:06:21",
+      "fechaHora": "25/11/2026, 08:09:49",
+      "timestamp": 1795612189290,
+      "tiempoEstanciaMinutos": 3,
+      "estado": "SALIDA_REGISTRADA",
+      "notas": "Salida confirmada por autoservicio. Tiempo de estancia: 3 min."
+    },
+    {
+      "id": "MOV-0114",
+      "tipo": "ENTRADA",
+      "placa": "ABC-4321",
+      "espacio": "B2",
+      "espacioId": 4,
+      "fechaHora": "25/11/2026, 08:09:37",
+      "timestamp": 1795612177265,
+      "estado": "ACTIVO",
+      "notas": "Entrada registrada mediante autoservicio de estacionamiento"
+    },
+    {
+      "id": "MOV-0113",
+      "tipo": "ENTRADA",
+      "placa": "ABC-1433",
+      "espacio": "A2",
+      "espacioId": 2,
+      "fechaHora": "25/11/2026, 08:09:19",
+      "timestamp": 1795612159270,
+      "estado": "ACTIVO",
+      "notas": "Entrada registrada mediante autoservicio de estacionamiento"
+    },
+    {
+      "id": "MOV-0112",
+      "tipo": "ENTRADA",
+      "placa": "ABC-1232",
+      "espacio": "B1",
+      "espacioId": 3,
+      "fechaHora": "25/11/2026, 08:08:55",
+      "timestamp": 1795612135904,
+      "estado": "ACTIVO",
+      "notas": "Entrada registrada mediante autoservicio de estacionamiento"
+    },
+    {
+      "id": "MOV-0111",
+      "tipo": "ENTRADA",
+      "placa": "ABC-1234",
+      "espacio": "A1",
+      "espacioId": 1,
+      "fechaHora": "25/11/2026, 08:06:21",
+      "timestamp": 1795611981968,
+      "estado": "SALIDA_REGISTRADA",
+      "notas": "Entrada registrada mediante autoservicio de estacionamiento"
+    },
+    {
+      "id": "MOV-0110",
+      "tipo": "ENTRADA",
+      "placa": "ABC-2134",
+      "espacio": "A1",
+      "espacioId": 1,
+      "fechaHora": "25/11/2026, 02:46:56",
+      "timestamp": 1795592816709,
+      "estado": "ACTIVO",
+      "notas": "Entrada registrada mediante autoservicio de estacionamiento"
+    },
+    {
+      "id": "MOV-0109",
+      "movimientoEntradaId": "MOV-0108",
+      "tipo": "SALIDA",
+      "placa": "ABC-1234",
+      "espacio": "A1",
+      "espacioId": 1,
+      "horaIngreso": "25/11/2026, 02:46:20",
+      "fechaHora": "25/11/2026, 02:46:35",
+      "timestamp": 1795592795415,
+      "tiempoEstanciaMinutos": 1,
+      "estado": "SALIDA_REGISTRADA",
+      "notas": "Salida confirmada por autoservicio. Tiempo de estancia: 1 min."
+    },
+    {
+      "id": "MOV-0108",
+      "tipo": "ENTRADA",
+      "placa": "ABC-1234",
+      "espacio": "A1",
+      "espacioId": 1,
+      "fechaHora": "25/11/2026, 02:46:20",
+      "timestamp": 1795592780613,
+      "estado": "SALIDA_REGISTRADA",
+      "notas": "Entrada registrada mediante autoservicio de estacionamiento"
+    },
+    {
+      "id": "MOV-0107",
+      "tipo": "ENTRADA",
+      "placa": "ABC-1234",
+      "espacio": "A1",
+      "espacioId": 1,
+      "fechaHora": "25/11/2026, 02:45:53",
+      "timestamp": 1795592753009,
+      "estado": "ACTIVO",
+      "notas": "Entrada registrada mediante autoservicio de estacionamiento"
+    },
+    {
+      "id": "MOV-0106",
+      "tipo": "ENTRADA",
+      "placa": "ABC-1234",
+      "espacio": "A1",
+      "espacioId": 1,
+      "fechaHora": "25/11/2026, 02:43:37",
+      "timestamp": 1795592617585,
+      "estado": "ACTIVO",
+      "notas": "Entrada registrada mediante autoservicio de estacionamiento"
+    },
+    {
+      "id": "MOV-0105",
+      "tipo": "ENTRADA",
+      "placa": "ABC-1234",
+      "espacio": "A1",
+      "espacioId": 1,
+      "fechaHora": "25/11/2026, 02:31:56",
+      "timestamp": 1795591916498,
+      "estado": "ACTIVO",
+      "notas": "Entrada registrada mediante autoservicio de estacionamiento"
+    },
+    {
+      "id": "MOV-0104",
+      "tipo": "ADMIN_LIBERAR",
+      "placa": "DEF-0003",
+      "espacio": "E3",
+      "espacioId": 3,
+      "fechaHora": "24/11/2026, 20:54:11",
+      "timestamp": 1795571651508,
+      "estado": "CORREGIDO",
+      "notas": "Liberación administrativa forzada: Liberado por administrador"
+    },
+    {
+      "id": "MOV-0103",
+      "tipo": "ADMIN_LIBERAR",
+      "placa": "DEF-0004",
+      "espacio": "E4",
+      "espacioId": 4,
+      "fechaHora": "24/11/2026, 20:54:08",
+      "timestamp": 1795571648543,
+      "estado": "CORREGIDO",
+      "notas": "Liberación administrativa forzada: Liberado por administrador"
+    },
+    {
+      "id": "MOV-0102",
+      "movimientoEntradaId": "MOV-0101",
+      "tipo": "SALIDA",
+      "placa": "TEST-9999",
+      "espacio": "E1",
+      "espacioId": 1,
+      "horaIngreso": "24/11/2026, 20:24:21",
+      "fechaHora": "24/11/2026, 20:24:21",
+      "timestamp": 1795569861366,
+      "tiempoEstanciaMinutos": 1,
+      "estado": "SALIDA_REGISTRADA",
+      "notas": "Salida confirmada por autoservicio. Tiempo de estancia: 1 min."
+    },
+    {
+      "id": "MOV-0101",
+      "tipo": "ENTRADA",
+      "placa": "TEST-9999",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 20:24:21",
+      "timestamp": 1795569861358,
+      "estado": "SALIDA_REGISTRADA",
+      "notas": "Entrada registrada mediante autoservicio de estacionamiento"
+    },
+    {
+      "id": "1795550510569",
+      "tipo": "ENTRADA",
+      "placa": "DESC-000",
+      "espacio": "E3",
+      "espacioId": 3,
+      "fechaHora": "24/11/2026, 15:01:50",
+      "timestamp": 1795550510440,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795550511324",
+      "tipo": "SALIDA",
+      "placa": "DESC-000",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 15:01:50",
+      "timestamp": 1795550510440,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795541526887",
+      "tipo": "ENTRADA",
+      "placa": "DESC-000",
+      "espacio": "E4",
+      "espacioId": 4,
+      "fechaHora": "24/11/2026, 12:32:06",
+      "timestamp": 1795541526725,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795541527163",
+      "tipo": "SALIDA",
+      "placa": "DESC-000",
+      "espacio": "E3",
+      "espacioId": 3,
+      "fechaHora": "24/11/2026, 12:32:06",
+      "timestamp": 1795541526725,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795541523350",
+      "tipo": "ENTRADA",
+      "placa": "DESC-000",
+      "espacio": "E3",
+      "espacioId": 3,
+      "fechaHora": "24/11/2026, 12:32:02",
+      "timestamp": 1795541522517,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795502577997",
+      "tipo": "ENTRADA",
+      "placa": "DESC-000",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 01:42:57",
+      "timestamp": 1795502577453,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795502216670",
+      "tipo": "SALIDA",
+      "placa": "DESC-000",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 01:36:55",
+      "timestamp": 1795502215986,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795502204371",
+      "tipo": "ENTRADA",
+      "placa": "DESC-000",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 01:36:44",
+      "timestamp": 1795502204086,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795502097545",
+      "tipo": "SALIDA",
+      "placa": "DESC-000",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 01:34:57",
+      "timestamp": 1795502097214,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795502079704",
+      "tipo": "ENTRADA",
+      "placa": "DESC-000",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 01:34:38",
+      "timestamp": 1795502078894,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795502068190",
+      "tipo": "SALIDA",
+      "placa": "DESC-000",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 01:34:28",
+      "timestamp": 1795502068083,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795502062854",
+      "tipo": "ENTRADA",
+      "placa": "DESC-000",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 01:34:22",
+      "timestamp": 1795502062678,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795502055144",
+      "tipo": "SALIDA",
+      "placa": "DESC-000",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 01:34:14",
+      "timestamp": 1795502054418,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795502035534",
+      "tipo": "ENTRADA",
+      "placa": "DESC-000",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 01:33:55",
+      "timestamp": 1795502035289,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795501647863",
+      "tipo": "SALIDA",
+      "placa": "DESC-000",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 01:27:26",
+      "timestamp": 1795501646980,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795501599842",
+      "tipo": "ENTRADA",
+      "placa": "DESC-000",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 01:26:39",
+      "timestamp": 1795501599724,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795501562313",
+      "tipo": "SALIDA",
+      "placa": "DESC-000",
+      "espacio": "E4",
+      "espacioId": 4,
+      "fechaHora": "24/11/2026, 01:26:01",
+      "timestamp": 1795501561583,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795501477792",
+      "tipo": "SALIDA",
+      "placa": "DESC-000",
+      "espacio": "E3",
+      "espacioId": 3,
+      "fechaHora": "24/11/2026, 01:24:37",
+      "timestamp": 1795501477181,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795501474920",
+      "tipo": "ENTRADA",
+      "placa": "DESC-000",
+      "espacio": "E4",
+      "espacioId": 4,
+      "fechaHora": "24/11/2026, 01:24:34",
+      "timestamp": 1795501474556,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795501474948",
+      "tipo": "ENTRADA",
+      "placa": "DESC-000",
+      "espacio": "E3",
+      "espacioId": 3,
+      "fechaHora": "24/11/2026, 01:24:34",
+      "timestamp": 1795501474556,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795501466983",
+      "tipo": "SALIDA",
+      "placa": "DESC-000",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 01:24:26",
+      "timestamp": 1795501466817,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795501454379",
+      "tipo": "ENTRADA",
+      "placa": "DESC-000",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 01:24:13",
+      "timestamp": 1795501453719,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795501391986",
+      "tipo": "SALIDA",
+      "placa": "DESC-000",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 01:23:11",
+      "timestamp": 1795501391869,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795501350260",
+      "tipo": "ENTRADA",
+      "placa": "DESC-000",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 01:22:29",
+      "timestamp": 1795501349544,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795501347931",
+      "tipo": "SALIDA",
+      "placa": "DESC-000",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 01:22:26",
+      "timestamp": 1795501346947,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795501345293",
+      "tipo": "ENTRADA",
+      "placa": "DESC-000",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 01:22:24",
+      "timestamp": 1795501344359,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795501318366",
+      "tipo": "SALIDA",
+      "placa": "DESC-000",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 01:21:57",
+      "timestamp": 1795501317950,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795501297128",
+      "tipo": "ENTRADA",
+      "placa": "DESC-000",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 01:21:37",
+      "timestamp": 1795501297101,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795501271028",
+      "tipo": "SALIDA",
+      "placa": "DESC-000",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 01:21:10",
+      "timestamp": 1795501270494,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795501242360",
+      "tipo": "ENTRADA",
+      "placa": "DESC-000",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 01:20:41",
+      "timestamp": 1795501241648,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795501239145",
+      "tipo": "SALIDA",
+      "placa": "DESC-000",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 01:20:38",
+      "timestamp": 1795501238908,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795501234072",
+      "tipo": "ENTRADA",
+      "placa": "DESC-000",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 01:20:33",
+      "timestamp": 1795501233748,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795501231775",
+      "tipo": "SALIDA",
+      "placa": "DESC-000",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 01:20:31",
+      "timestamp": 1795501231203,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795501228890",
+      "tipo": "ENTRADA",
+      "placa": "DESC-000",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 01:20:28",
+      "timestamp": 1795501228641,
+      "estado": "HISTÓRICO"
+    },
+    {
+      "id": "1795501226209",
+      "tipo": "SALIDA",
+      "placa": "DESC-000",
+      "espacio": "E1",
+      "espacioId": 1,
+      "fechaHora": "24/11/2026, 01:20:26",
+      "timestamp": 1795501226143,
+      "estado": "HISTÓRICO"
+    }
+  ],
+  "contadorMovimientos": 126,
+  "barreras": {
+    "entrada": "cerrada",
+    "salida": "cerrada"
+  },
+  "estadisticas": {
+    "totalIngresos": 41,
+    "totalSalidas": 31,
+    "picoOcupacion": 4
+  },
+  "incidencias": [
+    {
+      "id": 1795633376312,
+      "fechaHora": "25/11/2026, 14:02:56",
+      "tipo": "LLAMADA_OPERADOR",
+      "mensaje": "Conductor solicita asistencia inmediata",
+      "placa": "N/A",
+      "estado": "PENDIENTE"
+    },
+    {
+      "id": 1795629887755,
+      "fechaHora": "25/11/2026, 13:04:47",
+      "tipo": "BARRERA_BLOQUEADA",
+      "mensaje": "Reporte enviado desde kiosco - Tipo: BARRERA_BLOQUEADA",
+      "placa": "N/A",
+      "estado": "PENDIENTE"
+    },
+    {
+      "id": 1795624063591,
+      "fechaHora": "25/11/2026, 11:27:43",
+      "tipo": "LLAMADA_OPERADOR",
+      "mensaje": "Conductor solicita asistencia inmediata",
+      "placa": "N/A",
+      "estado": "PENDIENTE"
+    },
+    {
+      "id": 1795571627572,
+      "fechaHora": "24/11/2026, 20:53:47",
+      "tipo": "BARRERA_BLOQUEADA",
+      "mensaje": "Reporte enviado desde kiosco - Tipo: BARRERA_BLOQUEADA",
+      "placa": "N/A",
+      "estado": "PENDIENTE"
+    }
+  ],
+  "ultimaActualizacion": "2026-11-26T15:26:28.543Z"
+}
