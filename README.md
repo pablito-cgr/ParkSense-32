@@ -1,4 +1,4 @@
-# 🚗 Smart Parking — La Piazza (Machala, Ecuador)
+# 🚗 ParkSense 32 — La Piazza (Machala, Ecuador)
 
 Sistema inteligente de gestión de estacionamientos con arquitectura **SPA Full Stack** (Node.js + Express + HTML5/CSS3/JS vanilla) preparado para integración con microcontrolador **ESP32**, sensores ultrasónicos **HC-SR04** y control automatizado de barreras mediante servomotores.
 
