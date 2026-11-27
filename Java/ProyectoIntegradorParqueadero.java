@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class ParkSense32 {
+public class ProyectoIntegradorParqueadero {
 
     // Posición 0..3 -> A1, A2, B1, B2
     static final String[] NOMBRES_ESPACIOS = { "A1", "A2", "B1", "B2" };
