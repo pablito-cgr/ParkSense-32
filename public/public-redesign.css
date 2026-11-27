@@ -1909,3 +1909,613 @@ body.vista-publica .ambient-lights {
   transform: translateY(-4px);
   box-shadow: 0 12px 32px rgba(34, 211, 238, 0.12);
 }
+
+
+/* ==========================================================================
+   LIVE FLOW CARD — Actividad y flujo del estacionamiento en vivo
+   ========================================================================== */
+
+#modo-publico .live-flow-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-hair);
+  border-radius: 20px;
+  padding: 28px 32px 24px;
+  margin-top: 24px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Subtle top-accent line */
+#modo-publico .live-flow-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 32px;
+  right: 32px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.35), rgba(244, 63, 94, 0.25), transparent);
+}
+
+/* ── Card header ── */
+#modo-publico .live-flow-header {
+  margin-bottom: 20px;
+}
+
+#modo-publico .live-flow-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#modo-publico .live-flow-title {
+  font-family: var(--font-display);
+  font-size: 1.0rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+
+/* Animated live-pulse dot */
+#modo-publico .live-flow-pulse {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  animation: lfPulse 2s ease-in-out infinite;
+}
+
+@keyframes lfPulse {
+  0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(16,185,129,0.6); }
+  50%       { opacity: 0.7; transform: scale(1.15); box-shadow: 0 0 0 5px rgba(16,185,129,0); }
+}
+
+/* ── Two-column layout ── */
+#modo-publico .live-flow-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* ── Individual column ── */
+#modo-publico .live-flow-col {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-hair);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Column header ── */
+#modo-publico .live-flow-col-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-hair);
+}
+
+/* Icon circle */
+#modo-publico .live-flow-col-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+#modo-publico .live-flow-col-icon--entry {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+#modo-publico .live-flow-col-icon--exit {
+  background: rgba(244, 63, 94, 0.14);
+  color: #f43f5e;
+  border: 1px solid rgba(244, 63, 94, 0.22);
+}
+
+/* Column title */
+#modo-publico .live-flow-col-title {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  flex: 1;
+  text-transform: uppercase;
+}
+
+/* Counter badge */
+#modo-publico .live-flow-badge {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 999px;
+  flex-shrink: 0;
+  min-width: 28px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#modo-publico .live-flow-badge--entry {
+  background: rgba(16, 185, 129, 0.18);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+#modo-publico .live-flow-badge--exit {
+  background: rgba(244, 63, 94, 0.16);
+  color: #f43f5e;
+  border: 1px solid rgba(244, 63, 94, 0.28);
+}
+
+/* Badge "pop" animation on increment */
+#modo-publico .live-flow-badge.lf-pop {
+  animation: lfBadgePop 0.35s ease;
+}
+
+@keyframes lfBadgePop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+
+/* ── Scrollable list ── */
+#modo-publico .live-flow-list {
+  padding: 10px 12px;
+  overflow-y: auto;
+  max-height: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.08) transparent;
+}
+
+#modo-publico .live-flow-list::-webkit-scrollbar {
+  width: 4px;
+}
+#modo-publico .live-flow-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+#modo-publico .live-flow-list::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+}
+
+/* Empty state placeholder */
+#modo-publico .live-flow-empty {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: rgba(148, 163, 184, 0.45);
+  text-align: center;
+  padding: 28px 0;
+}
+
+/* ── Individual row item ── */
+#modo-publico .lf-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+
+  /* Entry animation */
+  animation: lfRowIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transform-origin: top center;
+}
+
+@keyframes lfRowIn {
+  from { opacity: 0; transform: translateY(-8px) scaleY(0.85); }
+  to   { opacity: 1; transform: translateY(0)   scaleY(1); }
+}
+
+#modo-publico .lf-row-time {
+  color: var(--muted);
+  white-space: nowrap;
+  font-size: 0.69rem;
+}
+
+#modo-publico .lf-row-label {
+  color: var(--ink);
+  font-size: 0.72rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#modo-publico .lf-row-slot {
+  font-weight: 700;
+  font-size: 0.72rem;
+  padding: 1px 7px;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
+/* Entry row accent */
+#modo-publico .lf-row--entry .lf-row-slot {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+}
+#modo-publico .lf-row--entry {
+  border-left: 2px solid rgba(16, 185, 129, 0.4);
+}
+
+/* Exit row accent */
+#modo-publico .lf-row--exit .lf-row-slot {
+  background: rgba(244, 63, 94, 0.15);
+  color: #f43f5e;
+}
+#modo-publico .lf-row--exit {
+  border-left: 2px solid rgba(244, 63, 94, 0.4);
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  #modo-publico .live-flow-columns {
+    grid-template-columns: 1fr;
+  }
+
+  #modo-publico .live-flow-card {
+    padding: 20px 18px 18px;
+  }
+}
+
+
+/* ==========================================================================
+   REDES SOCIALES VIALCORE TECH
+   Sección #contacto + footer mini-row
+   ========================================================================== */
+
+/* ── Wrapper principal ── */
+#modo-publico .social-networks-block {
+  max-width: 1100px;
+  margin: 48px auto 0;
+  padding: 36px 40px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-hair);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Top decorative gradient line */
+#modo-publico .social-networks-block::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 15%; right: 15%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(16,185,129,0.4) 25%,
+    rgba(244,63,94,0.3) 55%,
+    rgba(192,132,252,0.35) 80%,
+    transparent
+  );
+}
+
+/* ── Eyebrow label ── */
+#modo-publico .social-networks-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 20px 0;
+}
+
+/* ── Pills row ── */
+#modo-publico .social-networks-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* ── Base pill ── */
+#modo-publico .sn-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 18px 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border-hair);
+  background: var(--bg-elevated);
+  color: var(--muted);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, color 0.22s ease, background 0.22s ease;
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+}
+
+#modo-publico .sn-pill:hover,
+#modo-publico .sn-pill:focus-visible {
+  transform: translateY(-3px);
+  outline: none;
+}
+
+/* ── Icon wrapper ── */
+#modo-publico .sn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  transition: background 0.22s ease;
+}
+
+/* ── Label ── */
+#modo-publico .sn-label {
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.01em;
+}
+
+/* ── "Próximamente" badge ── */
+#modo-publico .sn-soon-badge {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(148,163,184,0.1);
+  border: 1px solid rgba(148,163,184,0.2);
+  color: rgba(148,163,184,0.7);
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+
+/* ── "Activo" badge ── */
+#modo-publico .sn-active-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(16,185,129,0.14);
+  border: 1px solid rgba(16,185,129,0.3);
+  color: #10b981;
+  white-space: nowrap;
+}
+
+#modo-publico .sn-active-dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #10b981;
+  animation: snDotPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes snDotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(1.4); }
+}
+
+/* ══ FACEBOOK ══ */
+#modo-publico .sn-pill--facebook .sn-icon {
+  background: rgba(24,119,242,0.12);
+  color: #1877f2;
+}
+#modo-publico .sn-pill--facebook:hover {
+  border-color: rgba(24,119,242,0.4);
+  box-shadow: 0 6px 24px rgba(24,119,242,0.14);
+  background: rgba(24,119,242,0.07);
+}
+#modo-publico .sn-pill--facebook:hover .sn-icon {
+  background: rgba(24,119,242,0.2);
+}
+
+/* ══ X / Twitter ══ */
+#modo-publico .sn-pill--x .sn-icon {
+  background: rgba(255,255,255,0.07);
+  color: #e7e9ea;
+}
+#modo-publico .sn-pill--x:hover {
+  border-color: rgba(231,233,234,0.3);
+  box-shadow: 0 6px 24px rgba(231,233,234,0.08);
+  background: rgba(255,255,255,0.05);
+}
+#modo-publico .sn-pill--x:hover .sn-icon {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+}
+
+/* ══ TikTok ══ */
+#modo-publico .sn-pill--tiktok .sn-icon {
+  background: rgba(255,255,255,0.07);
+  color: #e7e9ea;
+}
+#modo-publico .sn-pill--tiktok:hover {
+  border-color: rgba(37,244,238,0.3);
+  box-shadow: 0 6px 24px rgba(37,244,238,0.1), 0 0 0 1px rgba(254,44,85,0.15);
+  background: rgba(37,244,238,0.05);
+}
+#modo-publico .sn-pill--tiktok:hover .sn-icon {
+  background: linear-gradient(135deg, rgba(37,244,238,0.18), rgba(254,44,85,0.14));
+  color: #25f4ee;
+}
+
+/* ══ Instagram (canal ACTIVO — destacado) ══ */
+#modo-publico .sn-pill--instagram {
+  border-color: rgba(193,53,132,0.35);
+  background: linear-gradient(135deg,
+    rgba(64,93,230,0.08),
+    rgba(193,53,132,0.1),
+    rgba(253,29,29,0.08),
+    rgba(252,176,69,0.07)
+  );
+  box-shadow: 0 2px 14px rgba(193,53,132,0.1);
+}
+#modo-publico .sn-pill--instagram .sn-icon {
+  background: linear-gradient(135deg, rgba(64,93,230,0.18), rgba(193,53,132,0.2), rgba(252,176,69,0.18));
+  color: #c13584;
+}
+#modo-publico .sn-pill--instagram:hover {
+  transform: translateY(-4px) scale(1.025);
+  border-color: rgba(193,53,132,0.6);
+  box-shadow:
+    0 8px 28px rgba(193,53,132,0.22),
+    0 2px 8px rgba(252,176,69,0.14);
+  background: linear-gradient(135deg,
+    rgba(64,93,230,0.14),
+    rgba(193,53,132,0.18),
+    rgba(253,29,29,0.12),
+    rgba(252,176,69,0.1)
+  );
+}
+#modo-publico .sn-pill--instagram:hover .sn-icon {
+  background: linear-gradient(135deg, rgba(64,93,230,0.28), rgba(193,53,132,0.3), rgba(252,176,69,0.26));
+  color: #e1306c;
+}
+
+/* ── Toast de próximamente ── */
+#modo-publico .sn-toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-hair);
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 9999;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.5);
+}
+
+#modo-publico .sn-toast.sn-toast--visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ==========================================================================
+   FOOTER — mini social row
+   ========================================================================== */
+
+#modo-publico .footer-social-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+#modo-publico .footer-sn-ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid var(--border-hair);
+  background: var(--bg-elevated);
+  color: var(--muted);
+  text-decoration: none;
+  transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+#modo-publico .footer-sn-ico:hover {
+  transform: translateY(-2px);
+}
+
+/* Facebook */
+#modo-publico .footer-sn-ico--soon:nth-child(1):hover {
+  border-color: rgba(24,119,242,0.5);
+  color: #1877f2;
+  background: rgba(24,119,242,0.1);
+}
+/* X */
+#modo-publico .footer-sn-ico--soon:nth-child(2):hover {
+  border-color: rgba(255,255,255,0.3);
+  color: #fff;
+  background: rgba(255,255,255,0.08);
+}
+/* TikTok */
+#modo-publico .footer-sn-ico--soon:nth-child(3):hover {
+  border-color: rgba(37,244,238,0.4);
+  color: #25f4ee;
+  background: rgba(37,244,238,0.08);
+}
+/* Instagram */
+#modo-publico .footer-sn-ico--instagram {
+  border-color: rgba(193,53,132,0.3);
+  color: #c13584;
+  background: rgba(193,53,132,0.08);
+}
+#modo-publico .footer-sn-ico--instagram:hover {
+  border-color: rgba(193,53,132,0.6);
+  color: #e1306c;
+  background: rgba(193,53,132,0.16);
+  box-shadow: 0 4px 14px rgba(193,53,132,0.2);
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  #modo-publico .social-networks-block {
+    padding: 24px 18px;
+  }
+
+  #modo-publico .sn-pill {
+    padding: 9px 14px 9px 12px;
+    font-size: 0.74rem;
+  }
+
+  #modo-publico .sn-label {
+    font-size: 0.74rem;
+  }
+
+  #modo-publico .sn-soon-badge,
+  #modo-publico .sn-active-badge {
+    display: none;
+  }
+
+  #modo-publico .social-networks-row {
+    gap: 8px;
+  }
+
+  #modo-publico .sn-toast {
+    font-size: 0.72rem;
+    padding: 9px 16px;
+    white-space: normal;
+    text-align: center;
+    max-width: 88vw;
+    border-radius: 14px;
+  }
+}

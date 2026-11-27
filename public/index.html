@@ -145,7 +145,8 @@
           </div>
         </div>
 
-        <div class="media-placeholder-box hero-media-box" style="min-height:unset;height:auto;padding:0;overflow:hidden;">
+        <div class="media-placeholder-box hero-media-box"
+          style="min-height:unset;height:auto;padding:0;overflow:hidden;">
           <img src="assets/images/parqueaderodiseno.jpeg" alt="Diseño del parqueadero ParkSense 32"
             style="width:100%;height:auto;object-fit:contain;display:block;"
             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -718,6 +719,65 @@
             </p>
           </div>
         </div>
+
+        <!-- ═══════════════════════════════════════════════════════════
+             ACTIVIDAD Y FLUJO DEL ESTACIONAMIENTO EN VIVO
+             ═══════════════════════════════════════════════════════════ -->
+        <div class="live-flow-card" id="live-flow-card">
+          <!-- Encabezado de la tarjeta -->
+          <div class="live-flow-header">
+            <div class="live-flow-title-row">
+              <span class="live-flow-pulse" aria-hidden="true"></span>
+              <span class="live-flow-title">Actividad y flujo del estacionamiento en vivo</span>
+            </div>
+          </div>
+
+          <!-- Dos columnas: Entradas | Salidas -->
+          <div class="live-flow-columns">
+
+            <!-- ── Columna ENTRADAS ── -->
+            <div class="live-flow-col live-flow-col--entry">
+              <div class="live-flow-col-header">
+                <div class="live-flow-col-icon live-flow-col-icon--entry">
+                  <!-- Flecha de ingreso -->
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12h14" />
+                    <path d="m12 5 7 7-7 7" />
+                  </svg>
+                </div>
+                <span class="live-flow-col-title">ENTRADAS REGISTRADAS</span>
+                <span class="live-flow-badge live-flow-badge--entry" id="lf-count-entradas">0</span>
+              </div>
+              <div class="live-flow-list" id="lf-list-entradas" role="log" aria-live="polite"
+                aria-label="Historial de entradas">
+                <div class="live-flow-empty">Sin registros aún</div>
+              </div>
+            </div>
+
+            <!-- ── Columna SALIDAS ── -->
+            <div class="live-flow-col live-flow-col--exit">
+              <div class="live-flow-col-header">
+                <div class="live-flow-col-icon live-flow-col-icon--exit">
+                  <!-- Flecha de salida -->
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M19 12H5" />
+                    <path d="m12 19-7-7 7-7" />
+                  </svg>
+                </div>
+                <span class="live-flow-col-title">SALIDAS REGISTRADAS</span>
+                <span class="live-flow-badge live-flow-badge--exit" id="lf-count-salidas">0</span>
+              </div>
+              <div class="live-flow-list" id="lf-list-salidas" role="log" aria-live="polite"
+                aria-label="Historial de salidas">
+                <div class="live-flow-empty">Sin registros aún</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </section>
 
       <!-- =========================================================
@@ -1089,7 +1149,7 @@ for (int plaza = 0; plaza &lt; CANTIDAD_PLAZAS; plaza++) {
             <div
               style="flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(34,211,238,0.25),transparent);">
             </div>
-            <div style="display:flex;align-items:center;gap-10px;text-align:center;">
+            <div style="display:flex;align-items:center;gap:10px;text-align:center;">
               <span
                 style="display:inline-flex;align-items:center;gap:8px;padding:6px 18px;border-radius:999px;border:1px solid rgba(34,211,238,0.22);background:rgba(19,29,41,0.7);backdrop-filter:blur(8px);font-family:var(--font-mono);font-size:0.68rem;font-weight:600;letter-spacing:0.14em;color:rgba(103,232,249,0.85);text-transform:uppercase;white-space:nowrap;">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
@@ -1226,6 +1286,80 @@ for (int plaza = 0; plaza &lt; CANTIDAD_PLAZAS; plaza++) {
             </div>
           </form>
         </div>
+
+        <!-- ── Redes Sociales VialCore Tech ── -->
+        <div class="social-networks-block">
+          <p class="social-networks-eyebrow">Síguenos en nuestras redes</p>
+          <div class="social-networks-row" role="list">
+
+            <!-- Facebook — próximamente -->
+            <a href="#" class="sn-pill sn-pill--facebook sn-pill--soon"
+              aria-label="Facebook de VialCore Tech (próximamente)" data-tooltip="Perfil oficial en desarrollo"
+              role="listitem" onclick="return snShowToast(event, 'Facebook')">
+              <span class="sn-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                </svg>
+              </span>
+              <span class="sn-label">Facebook</span>
+              <span class="sn-soon-badge">Próximamente</span>
+            </a>
+
+            <!-- X / Twitter — próximamente -->
+            <a href="#" class="sn-pill sn-pill--x sn-pill--soon"
+              aria-label="X (Twitter) de VialCore Tech (próximamente)" data-tooltip="Perfil oficial en desarrollo"
+              role="listitem" onclick="return snShowToast(event, 'X / Twitter')">
+              <span class="sn-icon" aria-hidden="true">
+                <!-- X logo (original mark) -->
+                <svg width="17" height="17" viewBox="0 0 1200 1227" fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M714.163 519.284 1160.89 0h-105.86L667.137 450.887 357.328 0H0l468.492 681.821L0 1226.37h105.866l409.625-476.152 327.181 476.152H1200L714.137 519.284ZM569.165 687.828l-47.468-67.894L144.011 79.6816h162.604l304.797 435.9354 47.468 67.894 396.2 566.721H892.476L569.165 687.854Z" />
+                </svg>
+              </span>
+              <span class="sn-label">X (Twitter)</span>
+              <span class="sn-soon-badge">Próximamente</span>
+            </a>
+
+            <!-- TikTok — próximamente -->
+            <a href="#" class="sn-pill sn-pill--tiktok sn-pill--soon"
+              aria-label="TikTok de VialCore Tech (próximamente)" data-tooltip="Perfil oficial en desarrollo"
+              role="listitem" onclick="return snShowToast(event, 'TikTok')">
+              <span class="sn-icon" aria-hidden="true">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.75a8.19 8.19 0 0 0 4.79 1.53V6.84a4.85 4.85 0 0 1-1.02-.15Z" />
+                </svg>
+              </span>
+              <span class="sn-label">TikTok</span>
+              <span class="sn-soon-badge">Próximamente</span>
+            </a>
+
+            <!-- Instagram — ACTIVO (canal principal) -->
+            <a href="https://www.instagram.com/crisss.jp/" target="_blank" rel="noopener noreferrer"
+              class="sn-pill sn-pill--instagram sn-pill--active" aria-label="Instagram de VialCore Tech — canal activo"
+              role="listitem">
+              <span class="sn-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                </svg>
+              </span>
+              <span class="sn-label">Instagram</span>
+              <span class="sn-active-badge">
+                <span class="sn-active-dot" aria-hidden="true"></span>Activo
+              </span>
+            </a>
+
+          </div>
+
+          <!-- Toast de "próximamente" (oculto por defecto, mostrado via JS) -->
+          <div id="sn-toast" class="sn-toast" role="status" aria-live="polite"></div>
+        </div>
+        <!-- ── fin redes sociales ── -->
+
       </section>
 
     </main>
@@ -1236,6 +1370,38 @@ for (int plaza = 0; plaza &lt; CANTIDAD_PLAZAS; plaza++) {
         <div class="footer-left">
           <p>&copy; 2026 VialCore Tech &bull; ParkSense 32.</p>
           <small>Machala, Ecuador &bull; Sistema Automatizado de Gestión de Estacionamientos</small>
+          <!-- Mini social row in footer -->
+          <div class="footer-social-row" aria-label="Redes sociales">
+            <a href="#" onclick="return snShowToast(event,'Facebook')" class="footer-sn-ico footer-sn-ico--soon"
+              aria-label="Facebook (próximamente)" title="Facebook — Próximamente">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+              </svg>
+            </a>
+            <a href="#" onclick="return snShowToast(event,'X / Twitter')" class="footer-sn-ico footer-sn-ico--soon"
+              aria-label="X Twitter (próximamente)" title="X (Twitter) — Próximamente">
+              <svg width="13" height="13" viewBox="0 0 1200 1227" fill="currentColor">
+                <path
+                  d="M714.163 519.284 1160.89 0h-105.86L667.137 450.887 357.328 0H0l468.492 681.821L0 1226.37h105.866l409.625-476.152 327.181 476.152H1200L714.137 519.284ZM569.165 687.828l-47.468-67.894L144.011 79.6816h162.604l304.797 435.9354 47.468 67.894 396.2 566.721H892.476L569.165 687.854Z" />
+              </svg>
+            </a>
+            <a href="#" onclick="return snShowToast(event,'TikTok')" class="footer-sn-ico footer-sn-ico--soon"
+              aria-label="TikTok (próximamente)" title="TikTok — Próximamente">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.75a8.19 8.19 0 0 0 4.79 1.53V6.84a4.85 4.85 0 0 1-1.02-.15Z" />
+              </svg>
+            </a>
+            <a href="https://www.instagram.com/crisss.jp/" target="_blank" rel="noopener noreferrer"
+              class="footer-sn-ico footer-sn-ico--instagram" aria-label="Instagram VialCore Tech">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+              </svg>
+            </a>
+          </div>
         </div>
         <div class="footer-right">
           <div class="footer-qr-box">
@@ -2108,6 +2274,19 @@ for (int plaza = 0; plaza &lt; CANTIDAD_PLAZAS; plaza++) {
   <script src="app.js"></script>
   <script>
     if (window.lucide) { lucide.createIcons(); }
+
+    // ── Social Networks: "próximamente" toast ──────────────────
+    let _snToastTimer = null;
+    function snShowToast(e, red) {
+      e.preventDefault();
+      const toast = document.getElementById('sn-toast');
+      if (!toast) return false;
+      toast.textContent = '📲 El perfil de ' + red + ' está en desarrollo. ¡Próximamente!';
+      toast.classList.add('sn-toast--visible');
+      clearTimeout(_snToastTimer);
+      _snToastTimer = setTimeout(() => toast.classList.remove('sn-toast--visible'), 3200);
+      return false;
+    }
   </script>
 
 </body>

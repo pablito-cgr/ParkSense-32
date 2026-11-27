@@ -3,14 +3,9 @@
     {
       "id": 1,
       "codigo": "A1",
-      "ocupada": true,
-      "estado": "ocupado",
-      "vehiculo": {
-        "placa": "ABC-1234",
-        "horaIngreso": "27/11/2026, 01:04:13",
-        "timestamp": 1795759453887,
-        "movimientoId": "MOV-0127"
-      },
+      "ocupada": false,
+      "estado": "disponible",
+      "vehiculo": null,
       "distanciaHardware": 25.4
     },
     {
@@ -39,6 +34,17 @@
     }
   ],
   "movimientos": [
+    {
+      "id": "MOV-0128",
+      "tipo": "ADMIN_LIBERAR",
+      "placa": "ABC-1234",
+      "espacio": "A1",
+      "espacioId": 1,
+      "fechaHora": "27/11/2026, 03:49:07",
+      "timestamp": 1795769347632,
+      "estado": "CORREGIDO",
+      "notas": "Liberación administrativa forzada: Liberado por administrador"
+    },
     {
       "id": "MOV-0127",
       "tipo": "ENTRADA",
@@ -699,7 +705,7 @@
       "estado": "HISTÓRICO"
     }
   ],
-  "contadorMovimientos": 127,
+  "contadorMovimientos": 128,
   "barreras": {
     "entrada": "abierta",
     "salida": "cerrada"
@@ -743,5 +749,5 @@
       "estado": "PENDIENTE"
     }
   ],
-  "ultimaActualizacion": "2026-11-27T06:04:13.889Z"
+  "ultimaActualizacion": "2026-11-27T08:49:07.633Z"
 }

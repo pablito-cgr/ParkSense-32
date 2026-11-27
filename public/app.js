@@ -24,6 +24,103 @@ let clockInterval = null;
 let adminTimeoutTimer = null;
 const ADMIN_TIMEOUT_MS = 15 * 60 * 1000; // 15 minutes
 
+// ---- Live-Flow state (public activity card) ----
+// Stores the last known occupancy snapshot { espId: true|false }
+let _lfPrevSnapshot = null;
+let _lfCountEntradas = 0;
+let _lfCountSalidas  = 0;
+const SPACE_CODES = { 1: 'A1', 2: 'A2', 3: 'B1', 4: 'B2' };
+
+// ============================================================
+// LIVE-FLOW HELPERS
+// ============================================================
+
+/** Returns HH:MM:SS string from a Date (or now). */
+function _lfTimestamp(d) {
+  d = d || new Date();
+  return [d.getHours(), d.getMinutes(), d.getSeconds()]
+    .map(n => String(n).padStart(2, '0')).join(':');
+}
+
+/**
+ * Prepend a row to the given list element.
+ * Removes the "empty" placeholder on first insert.
+ */
+function _lfAddRow(listEl, type, slot) {
+  if (!listEl) return;
+
+  // Remove placeholder
+  const empty = listEl.querySelector('.live-flow-empty');
+  if (empty) empty.remove();
+
+  const isEntry = type === 'entrada';
+  const label   = isEntry ? 'Ingreso detectado' : 'Salida liberada';
+
+  const row = document.createElement('div');
+  row.className = 'lf-row lf-row--' + (isEntry ? 'entry' : 'exit');
+  row.innerHTML =
+    '<span class="lf-row-time">' + _lfTimestamp() + '</span>' +
+    '<span class="lf-row-label">' + label + '</span>' +
+    '<span class="lf-row-slot">' + slot + '</span>';
+
+  listEl.prepend(row);
+
+  // Keep list tidy (max 50 items)
+  const rows = listEl.querySelectorAll('.lf-row');
+  if (rows.length > 50) rows[rows.length - 1].remove();
+}
+
+/**
+ * Increment the counter badge with a quick pop animation.
+ */
+function _lfIncrementBadge(badgeId) {
+  const el = document.getElementById(badgeId);
+  if (!el) return;
+  const val = parseInt(el.textContent, 10) || 0;
+  el.textContent = val + 1;
+  el.classList.remove('lf-pop');
+  // Force reflow to restart animation
+  void el.offsetWidth;
+  el.classList.add('lf-pop');
+}
+
+/**
+ * Compare current spaces array against previous snapshot.
+ * Fires events for each plaza that changed state.
+ */
+function _lfProcessSnapshot(espacios) {
+  if (!espacios || !espacios.length) return;
+
+  const snap = {};
+  espacios.forEach(esp => { snap[esp.id] = !!esp.ocupada; });
+
+  if (_lfPrevSnapshot === null) {
+    // First run — just capture baseline, no events
+    _lfPrevSnapshot = snap;
+    return;
+  }
+
+  espacios.forEach(esp => {
+    const wasOccupied  = _lfPrevSnapshot[esp.id];
+    const nowOccupied  = snap[esp.id];
+    const slotCode     = SPACE_CODES[esp.id] || esp.codigo || ('E' + esp.id);
+
+    if (!wasOccupied && nowOccupied) {
+      // Plaza pasó de libre → ocupada  →  ENTRADA
+      _lfCountEntradas++;
+      _lfIncrementBadge('lf-count-entradas');
+      _lfAddRow(document.getElementById('lf-list-entradas'), 'entrada', slotCode);
+    } else if (wasOccupied && !nowOccupied) {
+      // Plaza pasó de ocupada → libre  →  SALIDA
+      _lfCountSalidas++;
+      _lfIncrementBadge('lf-count-salidas');
+      _lfAddRow(document.getElementById('lf-list-salidas'), 'salida', slotCode);
+    }
+  });
+
+  _lfPrevSnapshot = snap;
+}
+
 // Entry flow state (Option 2)
 let k2EspaciosLibres = [];
 let k2Recomendado = null;
@@ -334,6 +431,11 @@ async function actualizarEstadoPublico() {
       histBox.textContent =
         'Resumen en vivo: ' + data.totales.disponibles + ' libres / ' +
         data.totales.ocupados + ' ocupados (' + data.totales.porcentajeOcupacion + '% aforo).';
+    }
+
+    // ── Live-Flow: detectar entradas / salidas por cambio de estado ──
+    if (data.espacios) {
+      _lfProcessSnapshot(data.espacios);
     }
 
   } catch (err) {
