@@ -93,8 +93,8 @@ body.vista-publica .ambient-lights {
 }
 
 #modo-publico .brand-mark-svg {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   flex-shrink: 0;
 }
 
@@ -1168,12 +1168,11 @@ body.vista-publica .ambient-lights {
 }
 
 #modo-publico .company-logo-slot {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
   overflow: hidden;
   background: var(--bg-elevated);
-  border: 1px dashed rgba(255, 255, 255, 0.22);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1896,4 +1895,17 @@ body.vista-publica .ambient-lights {
   #modo-publico .etapas-evidencia-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ── Subsección Docentes Responsables ── */
+@media (min-width: 768px) {
+  .docentes-grid-resp {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+.docente-card-hover:hover {
+  border-color: rgba(34, 211, 238, 0.5) !important;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(34, 211, 238, 0.12);
 }
