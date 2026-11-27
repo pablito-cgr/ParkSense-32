@@ -3,9 +3,14 @@
     {
       "id": 1,
       "codigo": "A1",
-      "ocupada": false,
-      "estado": "disponible",
-      "vehiculo": null,
+      "ocupada": true,
+      "estado": "ocupado",
+      "vehiculo": {
+        "placa": "ABC-1234",
+        "horaIngreso": "27/11/2026, 01:04:13",
+        "timestamp": 1795759453887,
+        "movimientoId": "MOV-0127"
+      },
       "distanciaHardware": 25.4
     },
     {
@@ -34,6 +39,17 @@
     }
   ],
   "movimientos": [
+    {
+      "id": "MOV-0127",
+      "tipo": "ENTRADA",
+      "placa": "ABC-1234",
+      "espacio": "A1",
+      "espacioId": 1,
+      "fechaHora": "27/11/2026, 01:04:13",
+      "timestamp": 1795759453887,
+      "estado": "ACTIVO",
+      "notas": "Entrada registrada mediante autoservicio de estacionamiento"
+    },
     {
       "id": "MOV-0126",
       "tipo": "ADMIN_LIBERAR",
@@ -683,13 +699,13 @@
       "estado": "HISTÓRICO"
     }
   ],
-  "contadorMovimientos": 126,
+  "contadorMovimientos": 127,
   "barreras": {
-    "entrada": "cerrada",
+    "entrada": "abierta",
     "salida": "cerrada"
   },
   "estadisticas": {
-    "totalIngresos": 41,
+    "totalIngresos": 42,
     "totalSalidas": 31,
     "picoOcupacion": 4
   },
@@ -727,5 +743,5 @@
       "estado": "PENDIENTE"
     }
   ],
-  "ultimaActualizacion": "2026-11-26T15:26:28.543Z"
+  "ultimaActualizacion": "2026-11-27T06:04:13.889Z"
 }
