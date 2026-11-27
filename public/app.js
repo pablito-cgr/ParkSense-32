@@ -1252,14 +1252,107 @@ function formatearFechaHora(date) {
 }
 
 // ============================================================
-// 16. SMOOTH SCROLLING
+// 16. SMOOTH SCROLLING & DYNAMIC PUBLIC SECTION NAVIGATION
 // ============================================================
 
+const PUBLIC_SECTION_IDS = [
+  'inicio',
+  'nosotros',
+  'producto',
+  'como-funciona',
+  'simulacion',
+  'monitoreo',
+  'desarrollo',
+  'codigo',
+  'resultados',
+  'equipo',
+  'contacto'
+];
+
+function mostrarSeccionPublica(sectionId, scrollToTop = true) {
+  const targetId = PUBLIC_SECTION_IDS.includes(sectionId) ? sectionId : 'inicio';
+  const sections = document.querySelectorAll('#modo-publico .main-public-content > section[id]');
+
+  sections.forEach(sec => {
+    if (sec.id === targetId) {
+      sec.classList.remove('oculto');
+      sec.classList.add('is-visible');
+    } else {
+      sec.classList.add('oculto');
+    }
+  });
+
+  // Marcar como activo el enlace correspondiente en la barra de navegación
+  const navLinks = document.querySelectorAll('#nav-menu-links .nav-link');
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === '#' + targetId) {
+      link.classList.add('active');
+      link.setAttribute('aria-current', 'page');
+    } else {
+      link.classList.remove('active');
+      link.removeAttribute('aria-current');
+    }
+  });
+
+  // Cerrar menú móvil si está abierto
+  const navMenu = document.getElementById('nav-menu-links');
+  if (navMenu) {
+    navMenu.classList.remove('nav-open');
+  }
+
+  // Asegurar que los encabezados/elementos animados dentro de la sección visible no queden ocultos por ScrollTrigger
+  const activeSection = document.getElementById(targetId);
+  if (activeSection && typeof gsap !== 'undefined') {
+    const headings = activeSection.querySelectorAll('h1, h2');
+    if (headings.length) {
+      gsap.to(headings, {
+        y: 0,
+        opacity: 1,
+        clipPath: 'inset(0 0 0% 0)',
+        duration: 0.45,
+        ease: 'power3.out',
+        overwrite: true
+      });
+    }
+    const lines = activeSection.querySelectorAll('.linea-galeria');
+    if (lines.length) {
+      gsap.to(lines, {
+        scaleX: 1,
+        duration: 0.6,
+        ease: 'power2.out',
+        overwrite: true
+      });
+    }
+    if (typeof ScrollTrigger !== 'undefined') {
+      ScrollTrigger.refresh();
+    }
+  }
+
+  // Scroll suave hacia arriba si es necesario
+  if (scrollToTop && window.scrollY > 0) {
+    if (typeof lenis !== 'undefined' && lenis && typeof lenis.scrollTo === 'function') {
+      lenis.scrollTo(0, { immediate: false });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+}
+
 function configurarScrollSuave() {
+  // Mostrar únicamente la primera sección (#inicio) al cargar
+  mostrarSeccionPublica('inicio', false);
+
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', (e) => {
       const href = anchor.getAttribute('href');
       if (href && href.length > 1) {
+        const targetId = href.slice(1);
+        if (PUBLIC_SECTION_IDS.includes(targetId)) {
+          e.preventDefault();
+          mostrarSeccionPublica(targetId, true);
+          return;
+        }
         const target = document.querySelector(href);
         if (target) {
           e.preventDefault();
@@ -1691,11 +1784,16 @@ document.addEventListener('DOMContentLoaded', () => {
   tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const targetTab = btn.dataset.tab;
+      const panel = document.getElementById('tab-panel-' + targetTab);
+      if (!panel) return;
+
       tabBtns.forEach(b => b.classList.remove('active'));
       tabPanels.forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
-      const panel = document.getElementById('tab-panel-' + targetTab);
-      if (panel) panel.classList.add('active');
+
+      // Reiniciar animación CSS limpiamente en cada cambio de pestaña
+      void panel.offsetWidth;
+      panel.classList.add('active');
     });
   });
 });

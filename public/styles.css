@@ -1,4 +1,4 @@
-﻿/* =========================================================
+/* =========================================================
    SMART PARKING — Plataforma Unificada
    Modos: Público · Kiosco de Autoservicio (8 opciones) · Administración
    Diseño: Dark Glassmorphism · Cyber Emerald & Electric Cyan
@@ -3345,6 +3345,42 @@ body.vista-kiosco {
   font-size: 0.92rem;
   color: #94a3b8;
   line-height: 1.55;
+}
+
+/* Vista dinámica de sección única en el modo público */
+#modo-publico .main-public-content > section.oculto {
+  display: none !important;
+}
+
+#modo-publico .main-public-content > section:not(.oculto) {
+  animation: publicSectionFadeIn 0.28s ease-out;
+}
+
+@keyframes publicSectionFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Transición suave al alternar pestañas en la sección #codigo */
+#modo-publico .codigo-panel.active {
+  animation: codigoPanelFadeIn 0.3s ease-out both;
+}
+
+@keyframes codigoPanelFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 
