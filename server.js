@@ -35,6 +35,16 @@ const PUBLIC_DIR = path.join(__dirname, 'public');
 
 const ADMIN_TOKEN = 'smart-parking-admin-token-piazza-machala';
 
+// Configuración de reservas y antirrebote de sensores
+const TIEMPO_MAX_RESERVA_MS = 10 * 60 * 1000; // 10 minutos
+const ANTIRREBOTE_LECTURAS = 3; // 3 envíos consecutivos iguales para cambiar sensorOcupada
+const antirreboteSensores = {
+  1: { valorPendiente: null, conteo: 0 },
+  2: { valorPendiente: null, conteo: 0 },
+  3: { valorPendiente: null, conteo: 0 },
+  4: { valorPendiente: null, conteo: 0 }
+};
+
 // ======================================================
 // GESTIÓN DE CREDENCIALES (config.json)
 // ======================================================
@@ -81,11 +91,47 @@ function obtenerFechaHoraEcuador() {
 
 function inicializarEspaciosPorDefecto() {
   return [
-    { id: 1, codigo: 'A1', ocupada: false, estado: 'disponible', vehiculo: null, distanciaHardware: -1 },
-    { id: 2, codigo: 'A2', ocupada: false, estado: 'disponible', vehiculo: null, distanciaHardware: -1 },
-    { id: 3, codigo: 'B1', ocupada: false, estado: 'disponible', vehiculo: null, distanciaHardware: -1 },
-    { id: 4, codigo: 'B2', ocupada: false, estado: 'disponible', vehiculo: null, distanciaHardware: -1 }
+    { id: 1, codigo: 'A1', ocupada: false, reservada: false, sensorOcupada: false, visto: false, reservadaTimestamp: null, estado: 'disponible', vehiculo: null, distanciaHardware: -1 },
+    { id: 2, codigo: 'A2', ocupada: false, reservada: false, sensorOcupada: false, visto: false, reservadaTimestamp: null, estado: 'disponible', vehiculo: null, distanciaHardware: -1 },
+    { id: 3, codigo: 'B1', ocupada: false, reservada: false, sensorOcupada: false, visto: false, reservadaTimestamp: null, estado: 'disponible', vehiculo: null, distanciaHardware: -1 },
+    { id: 4, codigo: 'B2', ocupada: false, reservada: false, sensorOcupada: false, visto: false, reservadaTimestamp: null, estado: 'disponible', vehiculo: null, distanciaHardware: -1 }
   ];
+}
+
+function sincronizarEstadoDerivado(esp) {
+  const ocupadaFinal = Boolean(esp.reservada || esp.sensorOcupada);
+  esp.ocupada = ocupadaFinal;
+  if (esp.estado !== 'mantenimiento' && esp.estado !== 'reservado') {
+    esp.estado = ocupadaFinal ? 'ocupado' : 'disponible';
+  }
+  return ocupadaFinal;
+}
+
+function expirarReservasVencidas(ahora = Date.now()) {
+  let huboCambios = false;
+  db.espacios.forEach(esp => {
+    if (esp.reservada && !esp.visto && esp.reservadaTimestamp && (ahora - esp.reservadaTimestamp >= TIEMPO_MAX_RESERVA_MS)) {
+      esp.reservada = false;
+      esp.visto = false;
+      esp.reservadaTimestamp = null;
+      esp.vehiculo = null;
+      sincronizarEstadoDerivado(esp);
+      huboCambios = true;
+      console.log(`[Reserva Expirada] Plaza ${esp.codigo} liberada tras superar ${TIEMPO_MAX_RESERVA_MS / 60000} min sin detección del sensor.`);
+    }
+  });
+  return huboCambios;
+}
+
+function formatearEstadoPlazasLog() {
+  return db.espacios.map(e => ({
+    id: e.id,
+    codigo: e.codigo,
+    reservada: Boolean(e.reservada),
+    sensorOcupada: Boolean(e.sensorOcupada),
+    visto: Boolean(e.visto),
+    ocupadaFinal: Boolean(e.reservada || e.sensorOcupada)
+  }));
 }
 
 const CODIGOS_POR_ID = { 1: 'A1', 2: 'A2', 3: 'B1', 4: 'B2' };
@@ -99,19 +145,42 @@ function cargarDatos() {
       // Migración o carga de los 4 espacios A1, A2, B1, B2
       let espacios = inicializarEspaciosPorDefecto();
       if (Array.isArray(raw.espacios) && raw.espacios.length === 4) {
-        espacios = raw.espacios.map(e => ({
-          ...e,
-          codigo: CODIGOS_POR_ID[e.id] || e.codigo
-        }));
+        espacios = raw.espacios.map(e => {
+          const reservada = typeof e.reservada === 'boolean'
+            ? e.reservada
+            : Boolean(e.ocupada && e.vehiculo && e.vehiculo.movimientoId !== 'HW-AUTO');
+          const sensorOcupada = typeof e.sensorOcupada === 'boolean'
+            ? e.sensorOcupada
+            : Boolean(e.ocupada && (!e.vehiculo || e.vehiculo.movimientoId === 'HW-AUTO'));
+          const esp = {
+            ...e,
+            codigo: CODIGOS_POR_ID[e.id] || e.codigo,
+            reservada,
+            sensorOcupada,
+            visto: typeof e.visto === 'boolean' ? e.visto : sensorOcupada,
+            reservadaTimestamp: e.reservadaTimestamp || (reservada && e.vehiculo ? e.vehiculo.timestamp || null : null)
+          };
+          sincronizarEstadoDerivado(esp);
+          return esp;
+        });
       } else if (Array.isArray(raw.ultimoEstado) && raw.ultimoEstado.length === 4) {
-        espacios = raw.ultimoEstado.map(p => ({
-          id: Number(p.id),
-          codigo: CODIGOS_POR_ID[Number(p.id)] || `A${p.id}`,
-          ocupada: Boolean(p.ocupada),
-          estado: Boolean(p.ocupada) ? 'ocupado' : 'disponible',
-          vehiculo: p.vehiculo || (p.ocupada ? { placa: `DEF-000${p.id}`, horaIngreso: obtenerFechaHoraEcuador(), movimientoId: `MOV-INIT-${p.id}` } : null),
-          distanciaHardware: typeof p.distancia === 'number' ? p.distancia : -1
-        }));
+        espacios = raw.ultimoEstado.map(p => {
+          const sensorOcupada = Boolean(p.ocupada);
+          const esp = {
+            id: Number(p.id),
+            codigo: CODIGOS_POR_ID[Number(p.id)] || `A${p.id}`,
+            ocupada: sensorOcupada,
+            reservada: false,
+            sensorOcupada,
+            visto: sensorOcupada,
+            reservadaTimestamp: null,
+            estado: sensorOcupada ? 'ocupado' : 'disponible',
+            vehiculo: p.vehiculo || (sensorOcupada ? { placa: `DEF-000${p.id}`, horaIngreso: obtenerFechaHoraEcuador(), movimientoId: `MOV-INIT-${p.id}` } : null),
+            distanciaHardware: typeof p.distancia === 'number' ? p.distancia : -1
+          };
+          sincronizarEstadoDerivado(esp);
+          return esp;
+        });
       }
 
       return {
@@ -188,14 +257,19 @@ function esTokenAdminValido(req) {
 // RESUMEN Y REGLAS DE NEGOCIO DEL ESTACIONAMIENTO
 // ======================================================
 function obtenerResumenKiosco() {
+  if (expirarReservasVencidas()) {
+    guardarDatos();
+  }
+
   let ocupados = 0;
   let disponibles = 0;
   let reservados = 0;
 
   const listaEspacios = db.espacios.map(e => {
+    const ocupadaFinal = sincronizarEstadoDerivado(e);
     if (e.estado === 'reservado' || e.estado === 'mantenimiento') {
       reservados++;
-    } else if (e.ocupada || e.estado === 'ocupado') {
+    } else if (ocupadaFinal || e.estado === 'ocupado') {
       ocupados++;
     } else {
       disponibles++;
@@ -203,7 +277,10 @@ function obtenerResumenKiosco() {
     return {
       id: e.id,
       codigo: e.codigo,
-      ocupada: e.ocupada,
+      ocupada: ocupadaFinal,
+      reservada: Boolean(e.reservada),
+      sensorOcupada: Boolean(e.sensorOcupada),
+      visto: Boolean(e.visto),
       estado: e.estado,
       vehiculo: e.vehiculo ? { placa: e.vehiculo.placa, horaIngreso: e.vehiculo.horaIngreso, movimientoId: e.vehiculo.movimientoId } : null,
       distanciaHardware: e.distanciaHardware
@@ -438,8 +515,11 @@ function iniciarServidor() {
       const timestampActual = Date.now();
 
       // Asignar el espacio
-      espacio.ocupada = true;
+      espacio.reservada = true;
+      espacio.visto = false;
+      espacio.reservadaTimestamp = timestampActual;
       espacio.estado = 'ocupado';
+      sincronizarEstadoDerivado(espacio);
       espacio.vehiculo = {
         placa,
         horaIngreso: fechaHoraActual,
@@ -537,9 +617,16 @@ function iniciarServidor() {
 
       // Liberar espacio
       const codigoEspacio = espacio.codigo;
-      espacio.ocupada = false;
+      espacio.reservada = false;
+      espacio.sensorOcupada = false;
+      espacio.visto = false;
+      espacio.reservadaTimestamp = null;
       espacio.estado = 'disponible';
       espacio.vehiculo = null;
+      sincronizarEstadoDerivado(espacio);
+      if (antirreboteSensores[espacio.id]) {
+        antirreboteSensores[espacio.id] = { valorPendiente: null, conteo: 0 };
+      }
 
       // Actualizar estado del movimiento de entrada original si existe
       const movEntrada = db.movimientos.find(m => m.id === vehiculo.movimientoId && m.tipo === 'ENTRADA');
@@ -753,9 +840,16 @@ function iniciarServidor() {
 
       const vehiculoAnterior = espacio.vehiculo ? espacio.vehiculo.placa : 'SIN-PLACA';
 
-      espacio.ocupada = false;
+      espacio.reservada = false;
+      espacio.sensorOcupada = false;
+      espacio.visto = false;
+      espacio.reservadaTimestamp = null;
       espacio.estado = 'disponible';
       espacio.vehiculo = null;
+      sincronizarEstadoDerivado(espacio);
+      if (antirreboteSensores[espacio.id]) {
+        antirreboteSensores[espacio.id] = { valorPendiente: null, conteo: 0 };
+      }
 
       const movId = generarSiguienteMovimientoId();
       db.movimientos.unshift({
@@ -796,7 +890,13 @@ function iniciarServidor() {
       if (estado !== 'disponible') {
         espacio.ocupada = true;
       } else {
-        if (!espacio.vehiculo) espacio.ocupada = false;
+        espacio.reservada = false;
+        espacio.visto = false;
+        espacio.reservadaTimestamp = null;
+        if (!espacio.vehiculo) {
+          espacio.sensorOcupada = false;
+        }
+        sincronizarEstadoDerivado(espacio);
       }
 
       guardarDatos();
@@ -850,6 +950,9 @@ function iniciarServidor() {
         const { plazas, sensores, barreras } = req.body || {};
         const listaLecturas = plazas || sensores;
         const ahora = Date.now();
+        const estadoAntes = formatearEstadoPlazasLog();
+
+        expirarReservasVencidas(ahora);
 
         if (Array.isArray(listaLecturas)) {
           listaLecturas.slice(0, 4).forEach(lec => {
@@ -864,35 +967,56 @@ function iniciarServidor() {
               esp.distanciaHardware = Number(lec.distancia.toFixed(1));
             }
 
-            // Sincronizar ocupación física del sensor ultrasónico con la web
-            if (typeof lec.ocupada === 'boolean' && esp.estado !== 'reservado' && esp.estado !== 'mantenimiento') {
-              if (lec.ocupada === true) {
-                if (!esp.ocupada) {
-                  esp.ocupada = true;
-                  esp.estado = 'ocupado';
-                  if (!esp.vehiculo) {
-                    esp.vehiculo = {
-                      placa: 'SENSOR-HW',
-                      horaIngreso: obtenerFechaHoraEcuador(),
-                      timestamp: ahora,
-                      movimientoId: 'HW-AUTO'
-                    };
+            // Antirrebote: esperar ANTIRREBOTE_LECTURAS (3) envíos consecutivos con el mismo valor antes de cambiar sensorOcupada
+            if (typeof lec.ocupada === 'boolean') {
+              const estadoRebote = antirreboteSensores[idNum] || (antirreboteSensores[idNum] = { valorPendiente: null, conteo: 0 });
+              const sensorActual = Boolean(esp.sensorOcupada);
+
+              if (lec.ocupada === sensorActual) {
+                estadoRebote.valorPendiente = null;
+                estadoRebote.conteo = 0;
+              } else {
+                if (estadoRebote.valorPendiente === lec.ocupada) {
+                  estadoRebote.conteo++;
+                } else {
+                  estadoRebote.valorPendiente = lec.ocupada;
+                  estadoRebote.conteo = 1;
+                }
+
+                if (estadoRebote.conteo >= ANTIRREBOTE_LECTURAS) {
+                  esp.sensorOcupada = lec.ocupada;
+                  estadoRebote.valorPendiente = null;
+                  estadoRebote.conteo = 0;
+
+                  if (!sensorActual && esp.sensorOcupada === true) {
+                    // El sensor confirmó al vehículo en esta plaza
+                    esp.visto = true;
+                    if (!esp.vehiculo && esp.estado !== 'mantenimiento') {
+                      esp.vehiculo = {
+                        placa: 'SENSOR-HW',
+                        horaIngreso: obtenerFechaHoraEcuador(),
+                        timestamp: ahora,
+                        movimientoId: 'HW-AUTO'
+                      };
+                    }
+                  } else if (sensorActual === true && esp.sensorOcupada === false) {
+                    // El vehículo dejó la plaza tras haber sido visto por el sensor
+                    if (esp.visto) {
+                      esp.reservada = false;
+                      esp.visto = false;
+                      esp.reservadaTimestamp = null;
+                      esp.vehiculo = null;
+                    }
                   }
                 }
-              } else {
-                // Si el sensor ya no detecta vehículo:
-                // Damos 15 segundos de gracia si fue asignado desde el Kiosco para que el conductor llegue al cajón
-                const esRecienAsignadoKiosco = esp.vehiculo && esp.vehiculo.movimientoId !== 'HW-AUTO' && (ahora - (esp.vehiculo.timestamp || 0) < 15000);
-                if (esp.ocupada && !esRecienAsignadoKiosco) {
-                  esp.ocupada = false;
-                  esp.estado = 'disponible';
-                  esp.vehiculo = null;
-                }
               }
+
+              sincronizarEstadoDerivado(esp);
             }
           });
         }
 
+        // Actualizar solo el estado reportado de las barreras; cerrar barrera NO borra reservas ni reinicia plazas
         if (barreras && typeof barreras === 'object') {
           if ((barreras.entrada === 'abierta' || barreras.entrada === 'cerrada') && !comandosPendientes.entrada) {
             db.barreras.entrada = barreras.entrada;
@@ -911,6 +1035,10 @@ function iniciarServidor() {
         comandosPendientes.salida = null;
 
         guardarDatos();
+
+        const estadoDespues = formatearEstadoPlazasLog();
+        console.log('[POST /api/estado] ANTES:', JSON.stringify(estadoAntes), '| DESPUÉS:', JSON.stringify(estadoDespues));
+
         res.json({
           success: true,
           mensaje: 'Telemetría de hardware registrada correctamente.',

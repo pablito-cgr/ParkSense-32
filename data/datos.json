@@ -3,10 +3,15 @@
     {
       "id": 1,
       "codigo": "A1",
-      "ocupada": false,
-      "estado": "disponible",
-      "vehiculo": null,
-      "distanciaHardware": 25.4
+      "ocupada": true,
+      "estado": "ocupado",
+      "vehiculo": {
+        "placa": "ABC-1234",
+        "horaIngreso": "28/11/2026, 13:19:44",
+        "timestamp": 1795889984083,
+        "movimientoId": "MOV-0129"
+      },
+      "distanciaHardware": 68.4
     },
     {
       "id": 2,
@@ -14,7 +19,7 @@
       "ocupada": false,
       "estado": "disponible",
       "vehiculo": null,
-      "distanciaHardware": 8.1
+      "distanciaHardware": 71
     },
     {
       "id": 3,
@@ -22,7 +27,7 @@
       "ocupada": false,
       "estado": "disponible",
       "vehiculo": null,
-      "distanciaHardware": -1
+      "distanciaHardware": 66.2
     },
     {
       "id": 4,
@@ -30,10 +35,21 @@
       "ocupada": false,
       "estado": "disponible",
       "vehiculo": null,
-      "distanciaHardware": 291.7
+      "distanciaHardware": 155.1
     }
   ],
   "movimientos": [
+    {
+      "id": "MOV-0129",
+      "tipo": "ENTRADA",
+      "placa": "ABC-1234",
+      "espacio": "A1",
+      "espacioId": 1,
+      "fechaHora": "28/11/2026, 13:19:44",
+      "timestamp": 1795889984083,
+      "estado": "ACTIVO",
+      "notas": "Entrada registrada mediante autoservicio de estacionamiento"
+    },
     {
       "id": "MOV-0128",
       "tipo": "ADMIN_LIBERAR",
@@ -705,13 +721,13 @@
       "estado": "HISTÓRICO"
     }
   ],
-  "contadorMovimientos": 128,
+  "contadorMovimientos": 129,
   "barreras": {
     "entrada": "abierta",
     "salida": "cerrada"
   },
   "estadisticas": {
-    "totalIngresos": 42,
+    "totalIngresos": 43,
     "totalSalidas": 31,
     "picoOcupacion": 4
   },
@@ -749,5 +765,5 @@
       "estado": "PENDIENTE"
     }
   ],
-  "ultimaActualizacion": "2026-11-27T08:49:07.633Z"
+  "ultimaActualizacion": "2026-11-28T18:19:44.084Z"
 }
