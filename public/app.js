@@ -1386,6 +1386,8 @@ function mostrarSeccionPublica(sectionId, scrollToTop = true) {
 
   // Marcar como activo el enlace correspondiente en la barra de navegación
   const navLinks = document.querySelectorAll('#nav-menu-links .nav-link');
+  const dropdownLinks = document.querySelectorAll('#nav-menu-links .nav-dropdown-link');
+
   navLinks.forEach(link => {
     const href = link.getAttribute('href');
     if (href === '#' + targetId) {
@@ -1397,11 +1399,34 @@ function mostrarSeccionPublica(sectionId, scrollToTop = true) {
     }
   });
 
-  // Cerrar menú móvil si está abierto
+  dropdownLinks.forEach(subLink => {
+    const href = subLink.getAttribute('href');
+    if (href === '#' + targetId) {
+      subLink.classList.add('active');
+      subLink.setAttribute('aria-current', 'page');
+      const parentDropdown = subLink.closest('.nav-dropdown');
+      const parentToggle = parentDropdown ? parentDropdown.querySelector('.nav-dropdown-toggle') : null;
+      if (parentToggle) parentToggle.classList.add('active');
+    } else {
+      subLink.classList.remove('active');
+      subLink.removeAttribute('aria-current');
+    }
+  });
+
+  // Cerrar menú móvil y desplegables si están abiertos
   const navMenu = document.getElementById('nav-menu-links');
   if (navMenu) {
     navMenu.classList.remove('nav-open');
   }
+  const btnMobileToggle = document.getElementById('btn-nav-mobile');
+  if (btnMobileToggle) {
+    btnMobileToggle.setAttribute('aria-expanded', 'false');
+  }
+  document.querySelectorAll('#nav-menu-links .nav-dropdown.open').forEach(dd => {
+    dd.classList.remove('open');
+    const toggle = dd.querySelector('.nav-dropdown-toggle');
+    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+  });
 
   // Asegurar que los encabezados/elementos animados dentro de la sección visible no queden ocultos por ScrollTrigger
   const activeSection = document.getElementById(targetId);
@@ -1866,17 +1891,48 @@ document.addEventListener('DOMContentLoaded', () => {
 // 21. NAVEGACIÓN MÓVIL Y PESTAÑAS INTERACTIVAS DE CÓDIGO
 // ============================================================
 document.addEventListener('DOMContentLoaded', () => {
-  // Menú móvil para los 11 enlaces de la Navbar
+  // Menú móvil y desplegables/acordeones de la Navbar
   const btnMobile = document.getElementById('btn-nav-mobile');
   const navLinks = document.getElementById('nav-menu-links');
   if (btnMobile && navLinks) {
     btnMobile.addEventListener('click', () => {
-      navLinks.classList.toggle('nav-open');
+      const isOpen = navLinks.classList.toggle('nav-open');
+      btnMobile.setAttribute('aria-expanded', String(isOpen));
     });
-    navLinks.querySelectorAll('.nav-link').forEach(link => {
+    navLinks.querySelectorAll('a.nav-link, .nav-dropdown-link').forEach(link => {
       link.addEventListener('click', () => {
         navLinks.classList.remove('nav-open');
+        btnMobile.setAttribute('aria-expanded', 'false');
       });
+    });
+
+    const dropdowns = navLinks.querySelectorAll('.nav-dropdown');
+    dropdowns.forEach(dd => {
+      const toggle = dd.querySelector('.nav-dropdown-toggle');
+      if (!toggle) return;
+      toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const willOpen = !dd.classList.contains('open');
+        dropdowns.forEach(other => {
+          if (other !== dd) {
+            other.classList.remove('open');
+            const otherToggle = other.querySelector('.nav-dropdown-toggle');
+            if (otherToggle) otherToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+        dd.classList.toggle('open', willOpen);
+        toggle.setAttribute('aria-expanded', String(willOpen));
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!navLinks.contains(e.target)) {
+        dropdowns.forEach(dd => {
+          dd.classList.remove('open');
+          const toggle = dd.querySelector('.nav-dropdown-toggle');
+          if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        });
+      }
     });
   }
 
