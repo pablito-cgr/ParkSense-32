@@ -343,23 +343,100 @@
 
         <div class="proceso-steps-grid" style="margin-bottom: 40px;">
           <div class="proceso-step-card">
-            <span class="step-num">01</span>
+            <div class="step-visual-box">
+              <span class="step-badge">PASO 01</span>
+              <svg class="step-visual-svg" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true">
+                <!-- Marco de terminal / kiosco -->
+                <rect x="8" y="8" width="40" height="40" rx="6" stroke="#10b981" stroke-width="1.75" />
+                <!-- Placa vehicular -->
+                <rect x="13" y="15" width="30" height="14" rx="3" stroke="#2dd4bf" stroke-width="1.75"
+                  fill="rgba(16, 185, 129, 0.1)" />
+                <text x="28" y="24.5" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="6.8"
+                  font-weight="700" fill="#2dd4bf" letter-spacing="0.5">ABC-123</text>
+                <!-- Teclado numérico minimalista -->
+                <circle cx="18" cy="36" r="1.5" fill="#10b981" />
+                <circle cx="24.5" cy="36" r="1.5" fill="#10b981" />
+                <circle cx="31.5" cy="36" r="1.5" fill="#10b981" />
+                <circle cx="38" cy="36" r="1.5" fill="#2dd4bf" />
+                <path d="M18 41.5h20" stroke="#10b981" stroke-width="1.75" stroke-linecap="round" />
+              </svg>
+            </div>
             <h3>Registro de placa</h3>
             <p>El conductor ingresa su placa en la terminal de autoservicio al llegar a la barrera de entrada.</p>
           </div>
           <div class="proceso-step-card">
-            <span class="step-num">02</span>
+            <div class="step-visual-box">
+              <span class="step-badge">PASO 02</span>
+              <svg class="step-visual-svg" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true">
+                <!-- Cuadrícula 2x2: A1 resaltada en verde -->
+                <rect x="9" y="9" width="17" height="17" rx="3.5" stroke="#2dd4bf" stroke-width="1.75"
+                  fill="rgba(16, 185, 129, 0.22)" />
+                <path d="M14.5 17.5l2.2 2.2 4-4.2" stroke="#2dd4bf" stroke-width="1.75" stroke-linecap="round"
+                  stroke-linejoin="round" />
+                <rect x="30" y="9" width="17" height="17" rx="3.5" stroke="#10b981" stroke-width="1.75"
+                  stroke-opacity="0.55" />
+                <text x="38.5" y="19.5" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="6.5"
+                  fill="#10b981" opacity="0.8">A2</text>
+                <rect x="9" y="30" width="17" height="17" rx="3.5" stroke="#10b981" stroke-width="1.75"
+                  stroke-opacity="0.55" />
+                <text x="17.5" y="40.5" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="6.5"
+                  fill="#10b981" opacity="0.8">B1</text>
+                <rect x="30" y="30" width="17" height="17" rx="3.5" stroke="#10b981" stroke-width="1.75"
+                  stroke-opacity="0.55" />
+                <text x="38.5" y="40.5" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="6.5"
+                  fill="#10b981" opacity="0.8">B2</text>
+              </svg>
+            </div>
             <h3>Asignación inteligente</h3>
             <p>El sistema evalúa los espacios A1–B2 en tiempo real y recomienda el lugar óptimo disponible.</p>
           </div>
           <div class="proceso-step-card">
-            <span class="step-num">03</span>
+            <div class="step-visual-box">
+              <span class="step-badge">PASO 03</span>
+              <svg class="step-visual-svg" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true">
+                <!-- Poste y talanquera elevada a 90° -->
+                <rect x="9" y="32" width="7" height="15" rx="2" stroke="#10b981" stroke-width="1.75" />
+                <path d="M12.5 32V10" stroke="#2dd4bf" stroke-width="1.75" stroke-linecap="round" />
+                <!-- Ondas de sensor ultrasónico -->
+                <path d="M19 14c2 2.2 2 5.8 0 8" stroke="#2dd4bf" stroke-width="1.75" stroke-linecap="round" />
+                <path d="M23 11.5c3 3.5 3 9.5 0 13" stroke="#10b981" stroke-width="1.75" stroke-linecap="round"
+                  opacity="0.75" />
+                <!-- Silueta frontal de auto pasando -->
+                <path d="M24 38v-5l3.5-6.5h15L46 33v5" stroke="#10b981" stroke-width="1.75" stroke-linecap="round"
+                  stroke-linejoin="round" />
+                <rect x="22" y="35" width="26" height="8" rx="2.5" stroke="#2dd4bf" stroke-width="1.75"
+                  fill="rgba(16, 185, 129, 0.1)" />
+                <circle cx="27" cy="39" r="1.4" fill="#2dd4bf" />
+                <circle cx="43" cy="39" r="1.4" fill="#2dd4bf" />
+                <path d="M25 43v3M45 43v3" stroke="#10b981" stroke-width="1.75" stroke-linecap="round" />
+              </svg>
+            </div>
             <h3>Apertura y paso por sensor</h3>
             <p>El servomotor eleva la barrera a 90°; cuando el sensor ultrasónico confirma que el auto pasó, la barrera
               baja.</p>
           </div>
           <div class="proceso-step-card">
-            <span class="step-num">04</span>
+            <div class="step-visual-box">
+              <span class="step-badge">PASO 04</span>
+              <svg class="step-visual-svg" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true">
+                <!-- Bahía con indicador LED -->
+                <path d="M11 42V15a3 3 0 0 1 3-3h20a3 3 0 0 1 3 3v8" stroke="#10b981" stroke-width="1.75"
+                  stroke-linecap="round" />
+                <!-- LED de estado -->
+                <circle cx="24" cy="12" r="2.8" fill="#2dd4bf" stroke="#0b1018" stroke-width="1" />
+                <!-- Auto estacionado -->
+                <rect x="16" y="22" width="16" height="22" rx="4" stroke="#2dd4bf" stroke-width="1.75"
+                  fill="rgba(16, 185, 129, 0.12)" />
+                <path d="M19 28h10M19 38h10" stroke="#10b981" stroke-width="1.75" stroke-linecap="round" />
+                <!-- Flecha de salida / liberación automática -->
+                <path d="M36 33h12m0 0-4-4m4 4-4 4" stroke="#2dd4bf" stroke-width="1.75" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
             <h3>Estacionamiento y salida</h3>
             <p>El sensor de la bahía cambia el LED a rojo y actualiza la web; al salir, libera el espacio
               automáticamente.</p>
@@ -515,16 +592,9 @@
         </div>
 
         <div class="simulacion-grid">
-          <div class="media-placeholder-box" style="min-height: 360px;">
-            <img src="assets/simulacion-circuito.png" alt="Vista previa del circuito simulado en Wokwi/Tinkercad"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="media-placeholder-fallback">
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4" />
-              </svg>
-              <strong>Vista previa del circuito simulado</strong>
-              <span>Reemplazar ruta: public/assets/simulacion-circuito.png</span>
-            </div>
+          <div class="simulacion-embed-box">
+            <iframe src="https://wokwi.com/projects/481893980796986369?embed=1&viewOnly=1"
+              title="Simulación electrónica de ParkSense 32 en Wokwi" loading="lazy" allowfullscreen></iframe>
           </div>
 
           <div class="simulacion-info-card">
@@ -543,14 +613,10 @@
             </div>
 
             <div>
-              <a href="https://wokwi.com/" target="_blank" rel="noopener noreferrer" class="btn-primary-signal"
-                style="width:100%;">
-                <span>Abrir simulación en Wokwi / Tinkercad</span>
+              <a href="https://wokwi.com/projects/481893980796986369" target="_blank" rel="noopener noreferrer"
+                class="btn-primary-signal" style="width:100%;">
+                <span>Abrir simulación en Wokwi</span>
               </a>
-              <small
-                style="display:block;margin-top:8px;color:var(--muted);font-family:var(--font-mono);font-size:0.72rem;">
-                * Reemplaza el href con tu enlace directo de Wokwi o Tinkercad.
-              </small>
             </div>
           </div>
         </div>
@@ -1053,6 +1119,16 @@ for (int plaza = 0; plaza &lt; CANTIDAD_PLAZAS; plaza++) {
             <span class="equipo-rol-badge">Líder · Director de Proyecto</span>
             <h3>Pablo Carreño</h3>
             <p>Dirección general, coordinación del equipo, planificación de entregables y supervisión del proyecto.</p>
+            <div class="card-linkedin-row">
+              <a href="https://www.linkedin.com/in/pablo-carre%C3%B1o-03a07843b/" target="_blank"
+                rel="noopener noreferrer" class="linkedin-profile-btn" aria-label="LinkedIn de Pablo Carreño">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+            </div>
           </div>
 
           <div class="equipo-card">
@@ -1066,6 +1142,16 @@ for (int plaza = 0; plaza &lt; CANTIDAD_PLAZAS; plaza++) {
             <h3>Cristhian Palma</h3>
             <p>Desarrollo integral de la plataforma web, servidor Node.js, programación del firmware ESP32 e integración
               completa hardware-software.</p>
+            <div class="card-linkedin-row">
+              <a href="https://www.linkedin.com/in/cristhian-jose-palma-maldonado-575637437/" target="_blank"
+                rel="noopener noreferrer" class="linkedin-profile-btn" aria-label="LinkedIn de Cristhian Palma">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+            </div>
           </div>
 
           <div class="equipo-card">
@@ -1079,6 +1165,17 @@ for (int plaza = 0; plaza &lt; CANTIDAD_PLAZAS; plaza++) {
             <h3>Cristhoper Merizalde</h3>
             <p>Diseño estructural de la maqueta física, trazado de carriles, delimitación de bahías A1–B2 y acabados
               arquitectónicos.</p>
+            <div class="card-linkedin-row">
+              <a href="https://www.linkedin.com/in/cristhoper-merizalde-cajamarca-792251438/" target="_blank"
+                rel="noopener noreferrer" class="linkedin-profile-btn"
+                aria-label="LinkedIn de Cristhoper Merizalde Cajamarca">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+            </div>
           </div>
 
           <div class="equipo-card">
@@ -1091,6 +1188,16 @@ for (int plaza = 0; plaza &lt; CANTIDAD_PLAZAS; plaza++) {
             <h3>Matias Oyola</h3>
             <p>Armado de circuito electrónico, distribución de pines, cableado de sensores HC-SR04 y soporte de
               alimentación.</p>
+            <div class="card-linkedin-row">
+              <a href="https://www.linkedin.com/in/matias-oyola-20824843b/" target="_blank" rel="noopener noreferrer"
+                class="linkedin-profile-btn" aria-label="LinkedIn de Matías Oyola">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+            </div>
           </div>
 
           <div class="equipo-card">
@@ -1103,6 +1210,16 @@ for (int plaza = 0; plaza &lt; CANTIDAD_PLAZAS; plaza++) {
             <h3>Wilson Rios</h3>
             <p>Acoplamiento mecánico y calibración angular de los servomotores SG90 en las barreras de entrada y salida.
             </p>
+            <div class="card-linkedin-row">
+              <a href="https://www.linkedin.com/in/wilson-rios-655254438/" target="_blank" rel="noopener noreferrer"
+                class="linkedin-profile-btn" aria-label="LinkedIn de Wilson Ríos">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+            </div>
           </div>
 
           <div class="equipo-card">
@@ -1115,6 +1232,17 @@ for (int plaza = 0; plaza &lt; CANTIDAD_PLAZAS; plaza++) {
             <h3>Jazmany Romero</h3>
             <p>Pruebas de lectura ultrasónica, ajuste de umbrales de detección IR, buzzer de contramano y control de
               calidad.</p>
+            <div class="card-linkedin-row">
+              <a href="https://www.linkedin.com/in/jazmany-alexander-romero-reyes-387b49438/" target="_blank"
+                rel="noopener noreferrer" class="linkedin-profile-btn"
+                aria-label="LinkedIn de Jazmany Alexander Romero Reyes">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+            </div>
           </div>
 
           <div class="equipo-card">
@@ -1127,6 +1255,16 @@ for (int plaza = 0; plaza &lt; CANTIDAD_PLAZAS; plaza++) {
             <h3>Vladimir Criollo</h3>
             <p>Desarrollo de pseudocódigo en PSeInt, traducción algorítmica a Java y documentación técnica del sistema.
             </p>
+            <div class="card-linkedin-row">
+              <a href="https://www.linkedin.com/in/adrian-criollo-60a227402/" target="_blank" rel="noopener noreferrer"
+                class="linkedin-profile-btn" aria-label="LinkedIn de Vladimir Criollo">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+            </div>
           </div>
 
           <div class="equipo-card">
@@ -1139,6 +1277,16 @@ for (int plaza = 0; plaza &lt; CANTIDAD_PLAZAS; plaza++) {
             <h3>Carlos Vega</h3>
             <p>Validación del circuito en simulador, verificación de señalización LCD/LED y pruebas operativas de campo.
             </p>
+            <div class="card-linkedin-row">
+              <a href="https://www.linkedin.com/in/carlos-valdivieso-vega-47507b438/" target="_blank"
+                rel="noopener noreferrer" class="linkedin-profile-btn" aria-label="LinkedIn de Carlos Valdivieso Vega">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+            </div>
           </div>
         </div>
 
@@ -1191,6 +1339,16 @@ for (int plaza = 0; plaza &lt; CANTIDAD_PLAZAS; plaza++) {
                 style="margin:0 0 6px 0;font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:#ffffff;">
                 Ing. Carlos Vargas</h3>
               <p style="margin:0;font-size:0.875rem;font-weight:500;color:rgb(34,211,238);">Técnicas de Programación</p>
+              <div class="card-linkedin-row">
+                <a href="https://www.linkedin.com/in/cavargas10/" target="_blank" rel="noopener noreferrer"
+                  class="linkedin-profile-btn" aria-label="LinkedIn de Ing. Carlos Vargas">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                  </svg>
+                  <span>LinkedIn</span>
+                </a>
+              </div>
             </div>
 
             <!-- Tarjeta 2 — Ing. Richard Sucuy -->
@@ -1215,6 +1373,16 @@ for (int plaza = 0; plaza &lt; CANTIDAD_PLAZAS; plaza++) {
                 style="margin:0 0 6px 0;font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:#ffffff;">
                 Ing. Richard Sucuy</h3>
               <p style="margin:0;font-size:0.875rem;font-weight:500;color:rgb(34,211,238);">Lógica Matemática</p>
+              <div class="card-linkedin-row">
+                <a href="https://www.linkedin.com/in/richard-sucuy-zhingre/?locale=es-ES" target="_blank"
+                  rel="noopener noreferrer" class="linkedin-profile-btn" aria-label="LinkedIn de Ing. Richard Sucuy">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                  </svg>
+                  <span>LinkedIn</span>
+                </a>
+              </div>
             </div>
 
             <!-- Tarjeta 3 — Mgtr. Elmer Gallardo -->
