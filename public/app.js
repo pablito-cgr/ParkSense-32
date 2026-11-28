@@ -1891,6 +1891,16 @@ document.addEventListener('DOMContentLoaded', () => {
 // 21. NAVEGACIÓN MÓVIL Y PESTAÑAS INTERACTIVAS DE CÓDIGO
 // ============================================================
 document.addEventListener('DOMContentLoaded', () => {
+  // Autoformato de placa con guion (ABC-1234) en "¿Dónde estacioné?"
+  const k5InputPlaca = document.getElementById('k5-input-placa');
+  if (k5InputPlaca) {
+    let k5UltimaLongitud = k5InputPlaca.value.length;
+    k5InputPlaca.addEventListener('input', () => {
+      aplicarFormatoPlacaConGuion(k5InputPlaca, k5UltimaLongitud);
+      k5UltimaLongitud = k5InputPlaca.value.length;
+    });
+  }
+
   // Menú móvil y desplegables/acordeones de la Navbar
   const btnMobile = document.getElementById('btn-nav-mobile');
   const navLinks = document.getElementById('nav-menu-links');

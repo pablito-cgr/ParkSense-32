@@ -7,9 +7,9 @@
       "estado": "ocupado",
       "vehiculo": {
         "placa": "ABC-1234",
-        "horaIngreso": "28/11/2026, 13:19:44",
-        "timestamp": 1795889984083,
-        "movimientoId": "MOV-0129"
+        "horaIngreso": "28/11/2026, 13:32:04",
+        "timestamp": 1795890724520,
+        "movimientoId": "MOV-0131"
       },
       "distanciaHardware": 68.4
     },
@@ -40,6 +40,31 @@
   ],
   "movimientos": [
     {
+      "id": "MOV-0131",
+      "tipo": "ENTRADA",
+      "placa": "ABC-1234",
+      "espacio": "A1",
+      "espacioId": 1,
+      "fechaHora": "28/11/2026, 13:32:04",
+      "timestamp": 1795890724520,
+      "estado": "ACTIVO",
+      "notas": "Entrada registrada mediante autoservicio de estacionamiento"
+    },
+    {
+      "id": "MOV-0130",
+      "movimientoEntradaId": "MOV-0129",
+      "tipo": "SALIDA",
+      "placa": "ABC-1234",
+      "espacio": "A1",
+      "espacioId": 1,
+      "horaIngreso": "28/11/2026, 13:19:44",
+      "fechaHora": "28/11/2026, 13:31:34",
+      "timestamp": 1795890694274,
+      "tiempoEstanciaMinutos": 12,
+      "estado": "SALIDA_REGISTRADA",
+      "notas": "Salida confirmada por autoservicio. Tiempo de estancia: 12 min."
+    },
+    {
       "id": "MOV-0129",
       "tipo": "ENTRADA",
       "placa": "ABC-1234",
@@ -47,7 +72,7 @@
       "espacioId": 1,
       "fechaHora": "28/11/2026, 13:19:44",
       "timestamp": 1795889984083,
-      "estado": "ACTIVO",
+      "estado": "SALIDA_REGISTRADA",
       "notas": "Entrada registrada mediante autoservicio de estacionamiento"
     },
     {
@@ -721,14 +746,14 @@
       "estado": "HISTÓRICO"
     }
   ],
-  "contadorMovimientos": 129,
+  "contadorMovimientos": 131,
   "barreras": {
     "entrada": "abierta",
-    "salida": "cerrada"
+    "salida": "abierta"
   },
   "estadisticas": {
-    "totalIngresos": 43,
-    "totalSalidas": 31,
+    "totalIngresos": 44,
+    "totalSalidas": 32,
     "picoOcupacion": 4
   },
   "incidencias": [
@@ -765,5 +790,5 @@
       "estado": "PENDIENTE"
     }
   ],
-  "ultimaActualizacion": "2026-11-28T18:19:44.084Z"
+  "ultimaActualizacion": "2026-11-28T18:32:04.520Z"
 }
